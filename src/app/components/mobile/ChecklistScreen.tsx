@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowLeft, Check } from 'lucide-react';
 import * as Checkbox from '@radix-ui/react-checkbox';
 
@@ -20,40 +20,7 @@ const tasks = [
 ];
 
 export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
-  // Load tasks status from LocalStorage, auto-reset if the day has changed
-  const [checked, setChecked] = useState<Record<number, boolean>>(() => {
-    try {
-      const todayStr = new Date().toDateString();
-      const savedDate = localStorage.getItem('aquatani_checklist_date');
-      if (savedDate !== todayStr) {
-        localStorage.setItem('aquatani_checklist_date', todayStr);
-        localStorage.removeItem('aquatani_checklist');
-        return {};
-      }
-      const saved = localStorage.getItem('aquatani_checklist');
-      return saved ? JSON.parse(saved) : {};
-    } catch (e) {
-      return {};
-    }
-  });
-
-  // Load and bind notes
-  const [note, setNote] = useState(() => {
-    try {
-      return localStorage.getItem('aquatani_notes') || '';
-    } catch (e) {
-      return '';
-    }
-  });
-
-  // Persist to LocalStorage when changed
-  useEffect(() => {
-    localStorage.setItem('aquatani_checklist', JSON.stringify(checked));
-  }, [checked]);
-
-  useEffect(() => {
-    localStorage.setItem('aquatani_notes', note);
-  }, [note]);
+  const [checked, setChecked] = useState<Record<number, boolean>>({});
 
   const toggleTask = (id: number) => {
     setChecked(prev => ({ ...prev, [id]: !prev[id] }));
@@ -202,10 +169,8 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
         <div className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
           <h3 className="text-gray-900 mb-3">Catatan</h3>
           <textarea
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
             placeholder="Tulis yang penting hari ini..."
-            className="w-full h-24 px-4 py-3 border-2 border-gray-300 rounded-xl resize-none focus:outline-none focus:border-teal-500 text-gray-800"
+            className="w-full h-24 px-4 py-3 border-2 border-gray-300 rounded-xl resize-none focus:outline-none focus:border-teal-500"
           />
         </div>
       </div>

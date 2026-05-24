@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, Search, CloudRain, Wind, Droplets, MapPin, AlertTriangle } from 'lucide-react';
 
 interface WeatherScreenProps {
@@ -180,6 +180,13 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
     setErrorMsg('');
 
     try {
+      // Save last selected location to LocalStorage
+      localStorage.setItem('aquatani_last_location', JSON.stringify(loc));
+    } catch (e) {
+      console.error(e);
+    }
+
+    try {
       // Fetch weather from Open-Meteo Forecast API
       const res = await fetch(
         `https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&current=temperature_2m,relative_humidity_2m,is_day,precipitation,rain,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`
@@ -216,6 +223,19 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
       setLoading(false);
     }
   };
+
+  // Load last saved location on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem('aquatani_last_location');
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        handleSelectLocation(parsed);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
 
   return (
     <div className="min-h-screen pb-24 bg-slate-50">
