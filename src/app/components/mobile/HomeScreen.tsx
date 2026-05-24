@@ -61,9 +61,11 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
     <div className="min-h-screen pb-20">
       {/* Header */}
       <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 pt-8 pb-6">
-        <div className="mb-4">
-          <h1 className="text-2xl text-white mb-1">Selamat Datang di AquaTani</h1>
-          <p className="text-emerald-100 text-sm">Panduan Praktis Bertani Akuaponik</p>
+        <div className="mb-4 flex flex-col items-center text-center">
+          <div className="bg-white p-3 rounded-2xl shadow-md mb-3 inline-block">
+            <img src="/aquatani-logo.png" alt="AquaTani Logo" className="w-32 h-auto object-contain" />
+          </div>
+          <p className="text-emerald-50 text-sm font-medium">Panduan Praktis Bertani Akuaponik</p>
         </div>
 
         {/* Info Card */}
