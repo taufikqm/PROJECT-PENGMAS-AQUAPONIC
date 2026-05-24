@@ -137,18 +137,32 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
     setWeatherData(null);
 
     try {
-      // Fetch locations using Open-Meteo Geocoding API (100% free, no key)
+      // Fetch locations using Photon API (extremely accurate, indexes all sub-districts and villages in Indonesia)
       const res = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
-          searchQuery
-        )}&count=5&language=id&format=json`
+        `https://photon.komoot.io/api/?q=${encodeURIComponent(searchQuery)}&limit=5`
       );
       const data = await res.json();
 
-      if (!data.results || data.results.length === 0) {
+      if (!data.features || data.features.length === 0) {
         setErrorMsg('Nama wilayah tidak ditemukan. Coba ketik dengan ejaan yang benar (contoh: Lembang, Ciparay, Bandung).');
       } else {
-        setLocationOptions(data.results);
+        const mappedResults: GeocodingResult[] = data.features.map((f: any) => {
+          const prop = f.properties;
+          const coords = f.geometry.coordinates; // [longitude, latitude]
+          
+          const displayName = [];
+          if (prop.name) displayName.push(prop.name);
+          if (prop.city && prop.city !== prop.name) displayName.push(prop.city);
+          
+          return {
+            name: displayName.join(', '),
+            latitude: coords[1], // Latitude is at index 1
+            longitude: coords[0], // Longitude is at index 0
+            admin1: prop.state || prop.county,
+            country: prop.country,
+          };
+        });
+        setLocationOptions(mappedResults);
       }
     } catch (err) {
       console.error(err);
