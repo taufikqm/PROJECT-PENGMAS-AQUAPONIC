@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ArrowLeft, Fish, Sprout } from 'lucide-react';
+import { supabase } from '../../../lib/supabase';
 
 interface CalculatorScreenProps {
   onBack: () => void;
@@ -39,33 +40,47 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
     setIsLoading(true);
     try {
-      const response = await fetch('http://localhost:3001/api/calculate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          length: l,
-          width: w,
-          height: h,
-          fish_id: fishType,
-        }),
-      });
+      // Ambil data ikan dari Supabase
+      const { data, error } = await supabase
+        .from('fish_types')
+        .select('*')
+        .eq('id', fishType)
+        .single();
 
-      if (!response.ok) {
-        throw new Error('Gagal menghubungi server');
-      }
+      if (error) throw error;
 
-      const data = await response.json();
+      // Hitung volume dalam liter
+      const volume_liter = l * w * h * 1000;
+      
+      // Hitung jumlah ikan dan tanaman
+      const liter_per_fish = data.liter_per_fish || 50; 
+      const fish_count = Math.floor(volume_liter / liter_per_fish);
+      const plant_count = Math.floor(fish_count * 1.5);
+
       setResult({ 
-        volume: data.volume_liter, 
-        fishCount: data.fish_count, 
-        plantCount: data.plant_count,
-        fishName: data.fish_name
+        volume: volume_liter, 
+        fishCount: fish_count, 
+        plantCount: plant_count,
+        fishName: data.name
       });
     } catch (error) {
-      alert('Terjadi kesalahan saat menghitung. Pastikan server backend sudah berjalan.');
+      alert('Gagal menghubungi Supabase. Tapi tenang, kita pakai kalkulator darurat (Offline Mode)!');
       console.error(error);
+      
+      // Fallback lokal jika internet mati (Offline Mode)
+      console.warn("Menggunakan kalkulator lokal (Offline Fallback)...");
+      const volume_liter = l * w * h * 1000;
+      const localFish = fishTypes.find(f => f.id === fishType);
+      const density = localFish?.density || 50;
+      const fish_count = Math.floor(volume_liter / density);
+      const plant_count = Math.floor(fish_count * 1.5);
+      
+      setResult({
+        volume: volume_liter,
+        fishCount: fish_count,
+        plantCount: plant_count,
+        fishName: localFish?.name
+      });
     } finally {
       setIsLoading(false);
     }
