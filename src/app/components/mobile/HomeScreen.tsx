@@ -88,7 +88,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
             <img 
               src="/aquatani-logo.png" 
               alt="AquaTani Logo" 
-              className="w-16 h-16 object-contain drop-shadow-md" 
+              className="w-20 h-20 object-contain drop-shadow-md" 
             />
           </div>
           <div className="flex-1">
