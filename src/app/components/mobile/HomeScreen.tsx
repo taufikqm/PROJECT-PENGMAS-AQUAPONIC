@@ -108,6 +108,19 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
 
       {/* Main Content */}
       <div className="px-4 pt-4">
+        {/* Tips Card */}
+        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 shadow-sm mb-6">
+          <div className="flex items-start gap-3">
+            <span className="text-2xl drop-shadow-sm">💡</span>
+            <div>
+              <h4 className="text-blue-900 font-semibold mb-1">Tips Memulai</h4>
+              <p className="text-sm text-blue-800 leading-relaxed">
+                Silakan mulai dari menu <strong>"Belajar Dasar Akuaponik"</strong> dulu di bawah ini agar paham cara kerjanya ya.
+              </p>
+            </div>
+          </div>
+        </div>
+
         {/* Menu Grid */}
         <div className="space-y-3 mb-6">
           {menuItems.map((item) => {
@@ -130,19 +143,6 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
               </button>
             );
           })}
-        </div>
-
-        {/* Tips Card */}
-        <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 shadow-sm">
-          <div className="flex items-start gap-3">
-            <span className="text-2xl">💡</span>
-            <div>
-              <h4 className="text-blue-900 mb-1">Tips</h4>
-              <p className="text-sm text-blue-800">
-                Mulai dari "Cara Pakai Akuaponik" dulu ya biar paham cara kerjanya
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
