@@ -62,11 +62,11 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
       {/* Header */}
       <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 pt-10 pb-6 shadow-md mb-2 rounded-b-[2rem]">
         <div className="flex items-center gap-4 mb-6">
-          <div className="bg-white p-2.5 rounded-2xl shadow-sm flex-shrink-0">
+          <div className="bg-white p-2 rounded-2xl shadow-sm flex-shrink-0">
             <img 
               src="/aquatani-logo.png" 
               alt="AquaTani Logo" 
-              className="w-16 h-16 object-contain" 
+              className="w-12 h-12 object-contain" 
             />
           </div>
           <div>
