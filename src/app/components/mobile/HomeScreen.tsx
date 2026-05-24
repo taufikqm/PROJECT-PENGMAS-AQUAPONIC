@@ -60,24 +60,31 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
     <div className="min-h-screen pb-20 bg-slate-50">
       {/* Header */}
-      <div className="bg-white px-6 pt-10 pb-8 shadow-sm mb-2 rounded-b-[2.5rem]">
-        <div className="flex flex-col items-center text-center mb-6">
-          <img 
-            src="/aquatani-logo.png" 
-            alt="AquaTani Logo" 
-            className="w-48 h-auto object-contain drop-shadow-sm" 
-          />
-          <p className="text-emerald-600 font-medium mt-2">
-            Panduan Praktis Bertani Akuaponik
-          </p>
+      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 pt-10 pb-6 shadow-md mb-2 rounded-b-[2rem]">
+        <div className="flex items-center gap-4 mb-6">
+          <div className="bg-white p-2.5 rounded-2xl shadow-sm flex-shrink-0">
+            <img 
+              src="/aquatani-logo.png" 
+              alt="AquaTani Logo" 
+              className="w-16 h-16 object-contain" 
+            />
+          </div>
+          <div>
+            <h1 className="text-xl text-white font-semibold mb-1 leading-tight">
+              Selamat Datang di AquaTani
+            </h1>
+            <p className="text-emerald-100 text-sm">
+              Panduan Praktis Bertani Akuaponik
+            </p>
+          </div>
         </div>
 
         {/* Info Card */}
-        <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100/50">
+        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
           <div className="flex items-start gap-3">
-            <span className="text-3xl">🌾</span>
+            <span className="text-3xl drop-shadow-sm">🌾</span>
             <div className="flex-1">
-              <p className="text-sm text-emerald-800 leading-relaxed font-medium">
+              <p className="text-sm text-white leading-relaxed font-medium">
                 Panduan mudah cara ternak ikan dan tanam sayur dalam satu sistem
               </p>
             </div>
