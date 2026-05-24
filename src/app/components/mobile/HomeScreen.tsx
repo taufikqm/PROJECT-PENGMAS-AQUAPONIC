@@ -101,7 +101,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
             <div>
               <h4 className="text-blue-900 font-semibold mb-1">Tips Memulai</h4>
               <p className="text-sm text-blue-800 leading-relaxed">
-                Silakan mulai dari menu <strong>"Belajar Dasar Akuaponik"</strong> dulu di bawah ini agar paham cara kerjanya ya.
+                Mulai dari menu <strong>"Belajar Dasar Akuaponik"</strong> agar lebih paham cara kerjanya.
               </p>
             </div>
           </div>
