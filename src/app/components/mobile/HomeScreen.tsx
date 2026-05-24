@@ -103,8 +103,10 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
                 onClick={() => onNavigate(item.id)}
                 className="w-full bg-white rounded-2xl p-4 shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex items-center gap-4 border border-gray-100"
               >
-                <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-2 border border-black/5`}>
-                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain mix-blend-multiply" />
+                <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-1.5 border border-black/5`}>
+                  <div className="w-full h-full bg-white rounded-lg flex items-center justify-center shadow-sm overflow-hidden p-1">
+                    <img src={item.icon} alt={item.title} className="w-full h-full object-contain scale-110" />
+                  </div>
                 </div>
                 <div className="flex-1 text-left">
                   <h3 className="text-gray-900 mb-0.5">{item.title}</h3>
