@@ -7,52 +7,52 @@ interface HomeScreenProps {
 const menuItems = [
   {
     id: 'tutorial',
-    emoji: '📚',
+    icon: '/icons/tutorial.png',
     title: 'Belajar Dasar Akuaponik',
     subtitle: 'Langkah awal untuk pemula',
-    color: 'bg-emerald-500'
+    color: 'bg-emerald-100'
   },
   {
     id: 'sensor',
-    emoji: '🌡️',
+    icon: '/icons/sensor.png',
     title: 'Cek Kondisi Air',
     subtitle: 'Cara baca alat ukur dan artinya',
-    color: 'bg-blue-500'
+    color: 'bg-blue-100'
   },
   {
     id: 'troubleshoot',
-    emoji: '🏥',
+    icon: '/icons/clinic.png',
     title: 'Klinik Masalah',
     subtitle: 'Solusi ikan sakit & tanaman layu',
-    color: 'bg-orange-500'
+    color: 'bg-orange-100'
   },
   {
     id: 'calculator',
-    emoji: '🐟',
+    icon: '/icons/calculator.png',
     title: 'Hitung Isi Kolam',
     subtitle: 'Berapa banyak ikan yang pas?',
-    color: 'bg-cyan-500'
+    color: 'bg-cyan-100'
   },
   {
     id: 'nutrient',
-    emoji: '🌱',
+    icon: '/icons/nutrient.png',
     title: 'Pakan & Nutrisi',
     subtitle: 'Aturan kasih makan dan pupuk',
-    color: 'bg-green-500'
+    color: 'bg-green-100'
   },
   {
     id: 'filter',
-    emoji: '💧',
+    icon: '/icons/filter.png',
     title: 'Kebersihan Saringan',
     subtitle: 'Cara merawat penyaring air',
-    color: 'bg-indigo-500'
+    color: 'bg-indigo-100'
   },
   {
     id: 'checklist',
-    emoji: '📝',
+    icon: '/icons/checklist.png',
     title: 'Tugas Harian',
     subtitle: 'Daftar yang harus dicek tiap hari',
-    color: 'bg-teal-500'
+    color: 'bg-teal-100'
   }
 ];
 
@@ -103,8 +103,8 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
                 onClick={() => onNavigate(item.id)}
                 className="w-full bg-white rounded-2xl p-4 shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex items-center gap-4 border border-gray-100"
               >
-                <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-sm`}>
-                  <span className="text-3xl">{item.emoji}</span>
+                <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-2 border border-black/5`}>
+                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain drop-shadow-sm" />
                 </div>
                 <div className="flex-1 text-left">
                   <h3 className="text-gray-900 mb-0.5">{item.title}</h3>
