@@ -122,7 +122,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
                 className="w-full bg-white/90 backdrop-blur-sm border border-white rounded-2xl p-4 shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex items-center gap-4"
               >
                 <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-1.5 shadow-inner`}>
-                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain mix-blend-multiply contrast-[1.25] brightness-[1.05]" />
+                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain" />
                 </div>
                 <div className="flex-1 text-left">
                   <h3 className="text-gray-900 font-semibold mb-0.5">{item.title}</h3>
