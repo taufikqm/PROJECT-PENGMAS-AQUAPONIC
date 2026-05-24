@@ -92,23 +92,23 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
             />
           </div>
           <div className="flex-1">
-            <h1 className="text-xl text-white font-semibold mb-1.5 leading-tight">
+            <h1 className="text-xl text-white font-semibold mb-1 leading-tight">
               Selamat Datang di AquaTani
             </h1>
-            <div className="flex flex-wrap items-center gap-2">
-              <p className="text-emerald-100 text-xs">
-                Panduan Praktis Bertani Akuaponik
-              </p>
-              
-              {/* Connection Status Micro Pill */}
+            <p className="text-emerald-100 text-xs mb-2">
+              Panduan Praktis Bertani Akuaponik
+            </p>
+            
+            {/* Connection Status Micro Pill */}
+            <div>
               {isOnline ? (
-                <div className="bg-white/15 backdrop-blur-sm text-white text-[9px] font-bold border border-white/20 px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-inner">
+                <div className="bg-white/15 backdrop-blur-sm text-white text-[9px] font-bold border border-white/20 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse shadow-[0_0_6px_rgba(34,211,238,0.8)]"></span>
                   <span>Online</span>
                 </div>
               ) : (
-                <div className="bg-amber-500/20 backdrop-blur-sm text-amber-200 text-[9px] font-bold border border-amber-500/30 px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-inner">
-                  <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_4px_rgba(245,158,11,0.7)]"></span>
+                <div className="bg-amber-500/20 backdrop-blur-sm text-amber-200 text-[9px] font-bold border border-amber-500/30 px-2.5 py-0.5 rounded-full inline-flex items-center gap-1.5 shadow-sm">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_4px_rgba(245,158,11,0.7)]"></span>
                   <span>Offline</span>
                 </div>
               )}
