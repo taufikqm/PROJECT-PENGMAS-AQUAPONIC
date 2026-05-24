@@ -1,4 +1,3 @@
-import { BookOpen, HelpCircle, AlertCircle, Calculator, Sprout, Filter, CheckSquare } from 'lucide-react';
 
 interface HomeScreenProps {
   onNavigate: (page: string) => void;
@@ -18,6 +17,13 @@ const menuItems = [
     title: 'Cek Kondisi Air',
     subtitle: 'Cara baca alat ukur dan artinya',
     color: 'bg-blue-200'
+  },
+  {
+    id: 'weather',
+    icon: '/icons/weather.png',
+    title: 'Prakiraan Cuaca Lahan',
+    subtitle: 'Saran harian untuk kolam & tanaman',
+    color: 'bg-amber-200'
   },
   {
     id: 'troubleshoot',

@@ -9,9 +9,10 @@ import { FilterScreen } from './components/mobile/FilterScreen';
 import { ChecklistScreen } from './components/mobile/ChecklistScreen';
 import { NutrientScreen } from './components/mobile/NutrientScreen';
 import { AboutScreen } from './components/mobile/AboutScreen';
+import { WeatherScreen } from './components/mobile/WeatherScreen';
 import { BottomNav } from './components/mobile/BottomNav';
 
-type Page = 'home' | 'tutorial' | 'sensor' | 'troubleshoot' | 'calculator' | 'nutrient' | 'filter' | 'checklist' | 'profile';
+type Page = 'home' | 'tutorial' | 'sensor' | 'troubleshoot' | 'calculator' | 'nutrient' | 'filter' | 'checklist' | 'profile' | 'weather';
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -46,6 +47,8 @@ export default function App() {
         return <NutrientScreen onBack={() => handleNavigate('home')} />;
       case 'profile':
         return <AboutScreen onBack={() => handleNavigate('home')} />;
+      case 'weather':
+        return <WeatherScreen onBack={() => handleNavigate('home')} />;
       default:
         return <HomeScreen onNavigate={handleNavigate} />;
     }

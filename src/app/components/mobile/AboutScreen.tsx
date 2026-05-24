@@ -1,4 +1,4 @@
-import React from 'react';
+import { ArrowLeft } from 'lucide-react';
 
 interface AboutScreenProps {
   onBack: () => void;
@@ -9,6 +9,14 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
     <div className="min-h-screen pb-24 bg-slate-50">
       {/* Header with Gradient */}
       <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-6 pt-10 pb-8 shadow-md relative overflow-hidden">
+        {/* Back Button */}
+        <button
+          onClick={onBack}
+          className="absolute top-10 left-6 w-9 h-9 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white active:scale-95 transition-transform z-20"
+        >
+          <ArrowLeft className="w-5 h-5" />
+        </button>
+
         {/* Background decorative circles */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-10 -mt-10 blur-xl"></div>
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-8 -mb-8 blur-lg"></div>
