@@ -34,10 +34,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
         
         {/* Apa itu AquaTani? */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center">
-              <span className="text-xl">📱</span>
-            </div>
+          <div className="mb-4 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tentang Aplikasi</h3>
           </div>
           <p className="text-sm text-gray-600 leading-relaxed text-justify">
@@ -47,10 +44,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
 
         {/* Latar Belakang & Tujuan */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-              <span className="text-xl">🎯</span>
-            </div>
+          <div className="mb-4 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tujuan Proyek</h3>
           </div>
           <p className="text-sm text-gray-600 leading-relaxed text-justify mb-4">
@@ -80,10 +74,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
 
         {/* Tim Pengembang */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
-              <span className="text-xl">👥</span>
-            </div>
+          <div className="mb-4 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tim Pengembang</h3>
           </div>
           <p className="text-sm text-gray-500 mb-4">
@@ -109,14 +100,11 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
 
         {/* Catatan Penting */}
         <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-3xl p-5 shadow-sm mt-2">
-          <div className="flex gap-4 items-center">
-            <div className="text-3xl drop-shadow-sm">💡</div>
-            <div>
-              <h4 className="text-blue-900 font-bold mb-1">Catatan Penting</h4>
-              <p className="text-xs text-blue-800 leading-relaxed">
-                Aplikasi ini murni ditujukan sebagai alat bantu belajar dan panduan edukasi, bukan untuk sistem kontrol otomatis (*real-time monitoring*).
-              </p>
-            </div>
+          <div>
+            <h4 className="text-blue-900 font-bold mb-1">Catatan Penting</h4>
+            <p className="text-xs text-blue-800 leading-relaxed">
+              Aplikasi ini murni ditujukan sebagai alat bantu belajar dan panduan edukasi, bukan untuk sistem kontrol otomatis (*real-time monitoring*).
+            </p>
           </div>
         </div>
 
