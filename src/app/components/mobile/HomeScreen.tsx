@@ -10,12 +10,6 @@ const menuItems = [
     icon: '/icons/tutorial.png',
     title: 'Belajar Dasar Akuaponik',
     subtitle: 'Langkah awal untuk pemula',
-const menuItems = [
-  {
-    id: 'tutorial',
-    icon: '/icons/tutorial.png',
-    title: 'Belajar Dasar Akuaponik',
-    subtitle: 'Langkah awal untuk pemula',
     color: 'bg-emerald-100'
   },
   {
