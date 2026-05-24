@@ -83,38 +83,36 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
     <div className="min-h-screen pb-20 bg-slate-50">
       {/* Header */}
       <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-6 pt-10 pb-6 shadow-md mb-2">
-        <div className="flex items-center justify-between gap-4 mb-6">
-          <div className="flex items-center gap-3">
-            <div className="flex-shrink-0">
-              <img 
-                src="/aquatani-logo.png" 
-                alt="AquaTani Logo" 
-                className="w-14 h-14 object-contain drop-shadow-md" 
-              />
-            </div>
-            <div>
-              <h1 className="text-lg text-white font-semibold leading-tight">
-                Selamat Datang di AquaTani
-              </h1>
+        <div className="flex items-center gap-4 mb-6">
+          <div className="flex-shrink-0">
+            <img 
+              src="/aquatani-logo.png" 
+              alt="AquaTani Logo" 
+              className="w-16 h-16 object-contain drop-shadow-md" 
+            />
+          </div>
+          <div className="flex-1">
+            <h1 className="text-xl text-white font-semibold mb-1.5 leading-tight">
+              Selamat Datang di AquaTani
+            </h1>
+            <div className="flex flex-wrap items-center gap-2">
               <p className="text-emerald-100 text-xs">
                 Panduan Praktis Bertani Akuaponik
               </p>
+              
+              {/* Connection Status Micro Pill */}
+              {isOnline ? (
+                <div className="bg-white/15 backdrop-blur-sm text-white text-[9px] font-bold border border-white/20 px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-inner">
+                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-300 animate-pulse shadow-[0_0_6px_rgba(34,211,238,0.8)]"></span>
+                  <span>Online</span>
+                </div>
+              ) : (
+                <div className="bg-amber-500/20 backdrop-blur-sm text-amber-200 text-[9px] font-bold border border-amber-500/30 px-2 py-0.5 rounded-full inline-flex items-center gap-1 shadow-inner">
+                  <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_4px_rgba(245,158,11,0.7)]"></span>
+                  <span>Offline</span>
+                </div>
+              )}
             </div>
-          </div>
-
-          {/* Connection Status Pill */}
-          <div className="flex-shrink-0">
-            {isOnline ? (
-              <div className="bg-white/15 backdrop-blur-md text-white text-[10px] font-bold border border-white/20 px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse shadow-[0_0_8px_rgba(34,211,238,0.8)]"></span>
-                <span>Online</span>
-              </div>
-            ) : (
-              <div className="bg-amber-500/20 backdrop-blur-md text-amber-200 text-[10px] font-bold border border-amber-500/30 px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(245,158,11,0.7)]"></span>
-                <span>Offline</span>
-              </div>
-            )}
           </div>
         </div>
 
