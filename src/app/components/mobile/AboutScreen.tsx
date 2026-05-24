@@ -14,11 +14,11 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
         <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/10 rounded-full -ml-8 -mb-8 blur-lg"></div>
         
         <div className="relative z-10 flex flex-col items-center justify-center text-center mt-4">
-          <div className="w-24 h-24 bg-white/20 backdrop-blur-md rounded-3xl p-3 shadow-lg border border-white/30 mb-4 flex items-center justify-center">
+          <div className="w-24 h-24 bg-white rounded-3xl p-2 shadow-xl border-4 border-white/40 mb-4 flex items-center justify-center overflow-hidden">
             <img 
               src="/aquatani-logo.png" 
               alt="AquaTani Logo" 
-              className="w-full h-full object-contain drop-shadow-md" 
+              className="w-full h-full object-contain" 
             />
           </div>
           <h1 className="text-2xl text-white font-bold mb-1 tracking-wide">AquaTani</h1>
