@@ -80,11 +80,11 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
         </div>
 
         {/* Info Card */}
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20">
+        <div className="bg-white rounded-2xl p-4 shadow-lg border border-white/50">
           <div className="flex items-start gap-3">
             <span className="text-3xl drop-shadow-sm">🌾</span>
             <div className="flex-1">
-              <p className="text-sm text-white leading-relaxed font-medium">
+              <p className="text-sm text-emerald-900 leading-relaxed font-semibold">
                 Panduan mudah cara ternak ikan dan tanam sayur dalam satu sistem
               </p>
             </div>
