@@ -14,8 +14,8 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
       <div className="text-center animate-fadeIn">
         {/* Logo */}
         <div className="relative w-32 h-32 mx-auto mb-8">
-          <div className="absolute inset-0 bg-white rounded-3xl shadow-2xl flex items-center justify-center">
-            <div className="text-6xl">🌱💧</div>
+          <div className="absolute inset-0 bg-white rounded-3xl shadow-2xl flex items-center justify-center p-2 overflow-hidden">
+            <img src="/aquatani-logo.png" alt="AquaTani Logo" className="w-full h-full object-contain" />
           </div>
         </div>
 
