@@ -8,50 +8,50 @@ const menuItems = [
   {
     id: 'tutorial',
     emoji: '📚',
-    title: 'Cara Pakai Akuaponik',
-    subtitle: 'Panduan dasar untuk pemula',
+    title: 'Belajar Dasar Akuaponik',
+    subtitle: 'Langkah awal untuk pemula',
     color: 'bg-emerald-500'
   },
   {
     id: 'sensor',
-    emoji: '🎓',
-    title: 'Kalau Angka Berubah',
-    subtitle: 'Artinya apa dan harus apa',
+    emoji: '🌡️',
+    title: 'Cek Kondisi Air',
+    subtitle: 'Cara baca alat ukur dan artinya',
     color: 'bg-blue-500'
   },
   {
     id: 'troubleshoot',
-    emoji: '🔧',
-    title: 'Kalau Ada Masalah',
-    subtitle: 'Cara mengatasi masalah',
+    emoji: '🏥',
+    title: 'Klinik Masalah',
+    subtitle: 'Solusi ikan sakit & tanaman layu',
     color: 'bg-orange-500'
   },
   {
     id: 'calculator',
     emoji: '🐟',
-    title: 'Jumlah Ikan yang Cocok',
-    subtitle: 'Berapa ikan yang pas',
+    title: 'Hitung Isi Kolam',
+    subtitle: 'Berapa banyak ikan yang pas?',
     color: 'bg-cyan-500'
   },
   {
     id: 'nutrient',
     emoji: '🌱',
-    title: 'Makanan Tanaman',
-    subtitle: 'Cara kasih nutrisi',
+    title: 'Pakan & Nutrisi',
+    subtitle: 'Aturan kasih makan dan pupuk',
     color: 'bg-green-500'
   },
   {
     id: 'filter',
     emoji: '💧',
-    title: 'Susunan Saringan',
-    subtitle: 'Cara kerja filter air',
+    title: 'Kebersihan Saringan',
+    subtitle: 'Cara merawat penyaring air',
     color: 'bg-indigo-500'
   },
   {
     id: 'checklist',
-    emoji: '✅',
-    title: 'Cek Harian',
-    subtitle: 'Yang dicek setiap hari',
+    emoji: '📝',
+    title: 'Tugas Harian',
+    subtitle: 'Daftar yang harus dicek tiap hari',
     color: 'bg-teal-500'
   }
 ];
