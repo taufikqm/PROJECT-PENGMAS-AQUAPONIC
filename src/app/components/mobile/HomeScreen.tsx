@@ -10,63 +10,55 @@ const menuItems = [
     icon: '/icons/tutorial.png',
     title: 'Belajar Dasar Akuaponik',
     subtitle: 'Langkah awal untuk pemula',
-    cardColor: 'bg-emerald-50 border-emerald-100',
-    titleColor: 'text-emerald-900',
-    subtitleColor: 'text-emerald-700'
+const menuItems = [
+  {
+    id: 'tutorial',
+    icon: '/icons/tutorial.png',
+    title: 'Belajar Dasar Akuaponik',
+    subtitle: 'Langkah awal untuk pemula',
+    color: 'bg-emerald-100'
   },
   {
     id: 'sensor',
     icon: '/icons/sensor.png',
     title: 'Cek Kondisi Air',
     subtitle: 'Cara baca alat ukur dan artinya',
-    cardColor: 'bg-blue-50 border-blue-100',
-    titleColor: 'text-blue-900',
-    subtitleColor: 'text-blue-700'
+    color: 'bg-blue-100'
   },
   {
     id: 'troubleshoot',
     icon: '/icons/clinic.png',
     title: 'Klinik Masalah',
     subtitle: 'Solusi ikan sakit & tanaman layu',
-    cardColor: 'bg-orange-50 border-orange-100',
-    titleColor: 'text-orange-900',
-    subtitleColor: 'text-orange-700'
+    color: 'bg-orange-100'
   },
   {
     id: 'calculator',
     icon: '/icons/calculator.png',
     title: 'Hitung Isi Kolam',
     subtitle: 'Berapa banyak ikan yang pas?',
-    cardColor: 'bg-cyan-50 border-cyan-100',
-    titleColor: 'text-cyan-900',
-    subtitleColor: 'text-cyan-700'
+    color: 'bg-cyan-100'
   },
   {
     id: 'nutrient',
     icon: '/icons/nutrient.png',
     title: 'Pakan & Nutrisi',
     subtitle: 'Aturan kasih makan dan pupuk',
-    cardColor: 'bg-green-50 border-green-100',
-    titleColor: 'text-green-900',
-    subtitleColor: 'text-green-700'
+    color: 'bg-green-100'
   },
   {
     id: 'filter',
     icon: '/icons/filter.png',
     title: 'Kebersihan Saringan',
     subtitle: 'Cara merawat penyaring air',
-    cardColor: 'bg-indigo-50 border-indigo-100',
-    titleColor: 'text-indigo-900',
-    subtitleColor: 'text-indigo-700'
+    color: 'bg-indigo-100'
   },
   {
     id: 'checklist',
     icon: '/icons/checklist.png',
     title: 'Tugas Harian',
     subtitle: 'Daftar yang harus dicek tiap hari',
-    cardColor: 'bg-teal-50 border-teal-100',
-    titleColor: 'text-teal-900',
-    subtitleColor: 'text-teal-700'
+    color: 'bg-teal-100'
   }
 ];
 
@@ -128,16 +120,16 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`w-full ${item.cardColor} border rounded-2xl p-4 shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex items-center gap-4`}
+                className="w-full bg-white/90 backdrop-blur-sm border border-white rounded-2xl p-4 shadow-sm hover:shadow-md active:scale-[0.98] transition-all flex items-center gap-4"
               >
-                <div className="bg-white w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-1.5 shadow-sm border border-white/50">
-                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain contrast-125" />
+                <div className={`${item.color} w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 p-1.5 shadow-inner`}>
+                  <img src={item.icon} alt={item.title} className="w-full h-full object-contain mix-blend-multiply contrast-[1.25] brightness-[1.05]" />
                 </div>
                 <div className="flex-1 text-left">
-                  <h3 className={`${item.titleColor} font-semibold mb-0.5`}>{item.title}</h3>
-                  <p className={`text-sm ${item.subtitleColor}`}>{item.subtitle}</p>
+                  <h3 className="text-gray-900 font-semibold mb-0.5">{item.title}</h3>
+                  <p className="text-sm text-gray-500">{item.subtitle}</p>
                 </div>
-                <svg className={`w-5 h-5 ${item.subtitleColor} opacity-70`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-5 h-5 text-gray-400 opacity-70" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </button>
