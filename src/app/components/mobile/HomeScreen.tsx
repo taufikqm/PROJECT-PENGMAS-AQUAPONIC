@@ -58,22 +58,26 @@ const menuItems = [
 
 export function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen pb-20 bg-slate-50">
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 pt-8 pb-6">
-        <div className="mb-4 flex flex-col items-center text-center">
-          <div className="bg-white p-3 rounded-2xl shadow-md mb-3 inline-block">
-            <img src="/aquatani-logo.png" alt="AquaTani Logo" className="w-32 h-auto object-contain" />
-          </div>
-          <p className="text-emerald-50 text-sm font-medium">Panduan Praktis Bertani Akuaponik</p>
+      <div className="bg-white px-6 pt-10 pb-8 shadow-sm mb-2 rounded-b-[2.5rem]">
+        <div className="flex flex-col items-center text-center mb-6">
+          <img 
+            src="/aquatani-logo.png" 
+            alt="AquaTani Logo" 
+            className="w-48 h-auto object-contain drop-shadow-sm" 
+          />
+          <p className="text-emerald-600 font-medium mt-2">
+            Panduan Praktis Bertani Akuaponik
+          </p>
         </div>
 
         {/* Info Card */}
-        <div className="bg-white rounded-2xl p-4 shadow-md">
+        <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100/50">
           <div className="flex items-start gap-3">
             <span className="text-3xl">🌾</span>
             <div className="flex-1">
-              <p className="text-sm text-gray-900">
+              <p className="text-sm text-emerald-800 leading-relaxed font-medium">
                 Panduan mudah cara ternak ikan dan tanam sayur dalam satu sistem
               </p>
             </div>
