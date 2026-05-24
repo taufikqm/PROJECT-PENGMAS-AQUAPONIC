@@ -87,9 +87,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
   };
 
   return (
-    <div className="min-h-screen pb-20">
+    <div className="min-h-screen pb-20 bg-slate-50">
       {/* Header */}
-      <div className="bg-cyan-600 px-4 pt-4 pb-5">
+      <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-4 pt-4 pb-6 shadow-md mb-4">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-white mb-3 active:opacity-70"

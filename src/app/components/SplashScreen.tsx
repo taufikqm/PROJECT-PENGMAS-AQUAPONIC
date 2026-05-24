@@ -10,7 +10,7 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-b from-emerald-500 to-emerald-700 flex items-center justify-center">
+    <div className="fixed inset-0 bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 flex items-center justify-center">
       <div className="text-center animate-fadeIn">
         {/* Logo */}
         <div className="relative w-32 h-32 mx-auto mb-8">

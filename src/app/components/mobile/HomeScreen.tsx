@@ -60,7 +60,7 @@ export function HomeScreen({ onNavigate }: HomeScreenProps) {
   return (
     <div className="min-h-screen pb-20 bg-slate-50">
       {/* Header */}
-      <div className="bg-gradient-to-br from-emerald-500 to-emerald-600 px-6 pt-10 pb-6 shadow-md mb-2 rounded-b-[2rem]">
+      <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-6 pt-10 pb-6 shadow-md mb-2">
         <div className="flex items-center gap-4 mb-6">
           <div className="bg-white p-2 rounded-2xl shadow-sm flex-shrink-0">
             <img 
