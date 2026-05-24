@@ -10,49 +10,49 @@ const menuItems = [
     icon: '/icons/tutorial.png',
     title: 'Belajar Dasar Akuaponik',
     subtitle: 'Langkah awal untuk pemula',
-    color: 'bg-emerald-100'
+    color: 'bg-emerald-200'
   },
   {
     id: 'sensor',
     icon: '/icons/sensor.png',
     title: 'Cek Kondisi Air',
     subtitle: 'Cara baca alat ukur dan artinya',
-    color: 'bg-blue-100'
+    color: 'bg-blue-200'
   },
   {
     id: 'troubleshoot',
     icon: '/icons/clinic.png',
     title: 'Klinik Masalah',
     subtitle: 'Solusi ikan sakit & tanaman layu',
-    color: 'bg-orange-100'
+    color: 'bg-orange-200'
   },
   {
     id: 'calculator',
     icon: '/icons/calculator.png',
     title: 'Hitung Isi Kolam',
     subtitle: 'Berapa banyak ikan yang pas?',
-    color: 'bg-cyan-100'
+    color: 'bg-cyan-200'
   },
   {
     id: 'nutrient',
     icon: '/icons/nutrient.png',
     title: 'Pakan & Nutrisi',
     subtitle: 'Aturan kasih makan dan pupuk',
-    color: 'bg-green-100'
+    color: 'bg-green-200'
   },
   {
     id: 'filter',
     icon: '/icons/filter.png',
     title: 'Kebersihan Saringan',
     subtitle: 'Cara merawat penyaring air',
-    color: 'bg-indigo-100'
+    color: 'bg-indigo-200'
   },
   {
     id: 'checklist',
     icon: '/icons/checklist.png',
     title: 'Tugas Harian',
     subtitle: 'Daftar yang harus dicek tiap hari',
-    color: 'bg-teal-100'
+    color: 'bg-teal-200'
   }
 ];
 
