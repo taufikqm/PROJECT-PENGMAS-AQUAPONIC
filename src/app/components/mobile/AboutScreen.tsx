@@ -34,7 +34,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
         
         {/* Apa itu AquaTani? */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="mb-4 border-b border-gray-100 pb-2">
+          <div className="mb-2 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tentang Aplikasi</h3>
           </div>
           <p className="text-sm text-gray-600 leading-relaxed text-justify">
@@ -44,7 +44,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
 
         {/* Latar Belakang & Tujuan */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="mb-4 border-b border-gray-100 pb-2">
+          <div className="mb-2 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tujuan Proyek</h3>
           </div>
           <p className="text-sm text-gray-600 leading-relaxed text-justify mb-4">
@@ -74,7 +74,7 @@ export function AboutScreen({ onBack }: AboutScreenProps) {
 
         {/* Tim Pengembang */}
         <div className="bg-white rounded-3xl p-6 shadow-sm border border-emerald-50">
-          <div className="mb-4 border-b border-gray-100 pb-2">
+          <div className="mb-2 border-b border-gray-100 pb-2">
             <h3 className="text-gray-900 font-bold text-lg">Tim Pengembang</h3>
           </div>
           <p className="text-sm text-gray-500 mb-4">
