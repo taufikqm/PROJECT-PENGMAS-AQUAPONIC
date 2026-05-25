@@ -49,7 +49,7 @@ export default function App() {
             <div className="max-w-md mx-auto">
               <h1 className="text-2xl text-gray-900 mb-6">Tentang Aplikasi</h1>
               <div className="bg-white rounded-2xl p-6 shadow-md text-center mb-4">
-                <div className="w-28 h-28 rounded-full mx-auto mb-4 flex items-center justify-center bg-white overflow-hidden" style={{ boxShadow: '0 8px 32px 0 rgba(16, 120, 60, 0.18), 0 2px 12px 0 rgba(0,0,0,0.13)' }}>
+                <div className="w-28 h-28 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-white overflow-hidden" style={{ boxShadow: '0 8px 32px 0 rgba(16, 120, 60, 0.18), 0 2px 12px 0 rgba(0,0,0,0.13)' }}>
                   <img
                     src="/aquatani-logo.png"
                     alt="Logo AquaTani"

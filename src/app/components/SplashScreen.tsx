@@ -13,10 +13,12 @@ export function SplashScreen({ onComplete }: { onComplete: () => void }) {
     <div className="fixed inset-0 bg-gradient-to-b from-emerald-500 to-emerald-700 flex items-center justify-center">
       <div className="text-center animate-fadeIn">
         {/* Logo */}
-        <div className="relative w-32 h-32 mx-auto mb-8">
-          <div className="absolute inset-0 bg-white rounded-3xl shadow-2xl flex items-center justify-center">
-            <div className="text-6xl">🌱💧</div>
-          </div>
+        <div className="w-36 h-36 rounded-2xl mx-auto mb-8 flex items-center justify-center bg-white overflow-hidden" style={{ boxShadow: '0 8px 32px 0 rgba(16, 120, 60, 0.18), 0 2px 12px 0 rgba(0,0,0,0.13)' }}>
+          <img
+            src="/aquatani-logo.png"
+            alt="AquaTani Logo"
+            className="w-full h-full object-contain p-1"
+          />
         </div>
 
         {/* App Name */}
