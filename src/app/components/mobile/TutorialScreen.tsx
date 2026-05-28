@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, BookOpen, ClipboardCheck, Droplets, CloudRain, Wrench, Sprout } from 'lucide-react';
 
 interface TutorialScreenProps {
   onBack: () => void;
@@ -7,7 +7,7 @@ interface TutorialScreenProps {
 
 const modules = [
   {
-    emoji: '📖',
+    icon: BookOpen,
     title: 'Apa Itu Akuaponik',
     description: 'Cara kerja sistem akuaponik yang mudah dipahami',
     duration: '15 menit',
@@ -34,7 +34,7 @@ const modules = [
     )
   },
   {
-    emoji: '🔄',
+    icon: ClipboardCheck,
     title: 'Yang Dicek Setiap Hari',
     description: 'Hal-hal yang harus dilihat tiap pagi dan sore',
     duration: '10 menit',
@@ -57,7 +57,7 @@ const modules = [
     )
   },
   {
-    emoji: '🧪',
+    icon: Droplets,
     title: 'Cara Jaga pH Air',
     description: 'Supaya pH air tetap bagus untuk ikan dan tanaman',
     duration: '12 menit',
@@ -83,7 +83,7 @@ const modules = [
     )
   },
   {
-    emoji: '🌧️',
+    icon: CloudRain,
     title: 'Kalau Musim Hujan',
     description: 'Yang harus dilakukan saat hujan deras',
     duration: '8 menit',
@@ -109,7 +109,7 @@ const modules = [
     )
   },
   {
-    emoji: '🔧',
+    icon: Wrench,
     title: 'Cara Kerja Saringan',
     description: 'Bagaimana saringan membersihkan air',
     duration: '15 menit',
@@ -138,7 +138,7 @@ const modules = [
     )
   },
   {
-    emoji: '🌱',
+    icon: Sprout,
     title: 'Makanan Tanaman',
     description: 'Cara kasih nutrisi yang cukup untuk tanaman',
     duration: '10 menit',
@@ -178,6 +178,7 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
 
   if (activeModule !== null) {
     const module = modules[activeModule];
+    const DetailIcon = module.icon;
     return (
       <div className="min-h-screen bg-white pb-20 animate-in fade-in slide-in-from-bottom-4 duration-300">
         <div className={`${module.color} px-4 pt-4 pb-8 text-white rounded-b-3xl shadow-sm`}>
@@ -188,8 +189,8 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
             <ArrowLeft className="w-5 h-5" />
             <span>Kembali</span>
           </button>
-          <div className="text-4xl mb-3 bg-white/20 w-16 h-16 flex items-center justify-center rounded-2xl backdrop-blur-sm">
-            {module.emoji}
+          <div className="mb-3 bg-white/25 w-16 h-16 flex items-center justify-center rounded-2xl backdrop-blur-sm border border-white/10 text-white shadow-inner">
+            <DetailIcon className="w-9 h-9 stroke-[2.2]" />
           </div>
           <h1 className="text-2xl font-bold mb-2">{module.title}</h1>
           <p className="text-white/90 text-sm leading-relaxed">{module.description}</p>
@@ -247,6 +248,7 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
       <div className="px-4 space-y-3">
         {modules.map((module, index) => {
           const isCompleted = completedModules.includes(index);
+          const IconComponent = module.icon;
           return (
             <div
               key={index}
@@ -256,8 +258,8 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
               }`}
             >
               <div className="flex items-start gap-4 mb-3">
-                <div className={`${module.color} w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm text-2xl`}>
-                  {module.emoji}
+                <div className={`${module.color} w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-md text-white border border-white/20 p-3 shadow-inner`}>
+                  <IconComponent className="w-8 h-8 stroke-[2.2]" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-start justify-between gap-2">
