@@ -11,13 +11,6 @@ const menuItems = [
     color: 'bg-emerald-200'
   },
   {
-    id: 'sensor',
-    icon: '/icons/sensor.png',
-    title: 'Cek Kondisi Air',
-    subtitle: 'Cara baca alat ukur dan artinya',
-    color: 'bg-blue-200'
-  },
-  {
     id: 'weather',
     icon: '/icons/weather.png',
     title: 'Prakiraan Cuaca Lahan',
@@ -58,6 +51,13 @@ const menuItems = [
     title: 'Tugas Harian',
     subtitle: 'Daftar yang harus dicek tiap hari',
     color: 'bg-teal-200'
+  },
+  {
+    id: 'sensor',
+    icon: '/icons/sensor.png',
+    title: 'Bantuan',
+    subtitle: 'Cara baca alat ukur dan artinya',
+    color: 'bg-blue-200'
   }
 ];
 
