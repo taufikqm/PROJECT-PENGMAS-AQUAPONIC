@@ -30,11 +30,19 @@ interface DayData {
 }
 
 const PHASES: Array<{ key: PhaseKey; label: string; emoji: string; timeLabel: string; hour: number }> = [
-  { key: 'pagi',  label: 'Pagi',  emoji: '🌅', timeLabel: '05–10', hour: 7  },
-  { key: 'siang', label: 'Siang', emoji: '☀️', timeLabel: '10–14', hour: 12 },
-  { key: 'sore',  label: 'Sore',  emoji: '🌤️', timeLabel: '14–18', hour: 15 },
-  { key: 'malam', label: 'Malam', emoji: '🌙', timeLabel: '18–23', hour: 20 },
+  { key: 'pagi',  label: 'Pagi',  emoji: '🌅', timeLabel: '05.00–10.00', hour: 7  },
+  { key: 'siang', label: 'Siang', emoji: '☀️', timeLabel: '10.00–14.00', hour: 12 },
+  { key: 'sore',  label: 'Sore',  emoji: '🌤️', timeLabel: '14.00–18.00', hour: 15 },
+  { key: 'malam', label: 'Malam', emoji: '🌙', timeLabel: '18.00–23.00', hour: 20 },
 ];
+
+// Warna gradient unik per fase — intuitif & kontras
+const PHASE_STYLES: Record<PhaseKey, { gradient: string; badge: string }> = {
+  pagi:  { gradient: 'from-amber-400 via-yellow-400 to-orange-400',    badge: 'bg-black/15' },
+  siang: { gradient: 'from-orange-500 via-red-400 to-rose-500',        badge: 'bg-black/15' },
+  sore:  { gradient: 'from-sky-400 via-cyan-400 to-teal-500',          badge: 'bg-black/15' },
+  malam: { gradient: 'from-indigo-600 via-violet-600 to-slate-700',    badge: 'bg-black/20' },
+};
 
 const getWeatherInfo = (code: number) => {
   if (code === 0)               return { label: 'Cerah',         emoji: '☀️',  color: 'text-amber-600'  };
@@ -336,49 +344,46 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
 
                 <div className="grid grid-cols-2 gap-3">
                   {PHASES.map(phase => {
-                    const pd      = selDay[phase.key];
-                    const info    = getWeatherInfo(pd.weatherCode);
-                    const tip     = getFarmerTip(pd.weatherCode, phase.key);
-                    const highRain = pd.rainProb >= 60;
-                    const medRain  = pd.rainProb >= 30;
+                    const pd   = selDay[phase.key];
+                    const info = getWeatherInfo(pd.weatherCode);
+                    const tip  = getFarmerTip(pd.weatherCode, phase.key);
+                    const st   = PHASE_STYLES[phase.key];
                     return (
-                      <div
-                        key={phase.key}
-                        className={`bg-white rounded-3xl p-4 shadow-sm border ${highRain ? 'border-blue-100' : 'border-slate-100'}`}
-                      >
-                        {/* Header fase */}
-                        <div className="flex items-center gap-1.5 mb-3">
-                          <span className="text-lg">{phase.emoji}</span>
-                          <div>
-                            <p className="text-xs font-bold text-gray-800 leading-tight">{phase.label}</p>
-                            <p className="text-[9px] text-gray-400">{phase.timeLabel}</p>
+                      <div key={phase.key} className="rounded-3xl overflow-hidden shadow-md">
+
+                        {/* Bagian atas berwarna — suhu & kondisi */}
+                        <div className={`bg-gradient-to-br ${st.gradient} px-4 pt-4 pb-5 relative`}>
+                          {/* Nama fase & jam */}
+                          <div className="flex items-start justify-between mb-3">
+                            <div>
+                              <p className="text-white font-extrabold text-sm leading-tight">{phase.emoji} {phase.label}</p>
+                              <p className="text-white/70 text-[10px]">{phase.timeLabel}</p>
+                            </div>
+                            {pd.rainProb > 0 && (
+                              <span className={`${st.badge} px-2 py-0.5 rounded-full text-white text-[10px] font-bold`}>
+                                🌧 {pd.rainProb}%
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Suhu besar + emoji cuaca */}
+                          <div className="flex items-end justify-between">
+                            <div>
+                              <div className="flex items-baseline leading-none">
+                                <span className="text-4xl font-black text-white tracking-tight">{pd.temp}</span>
+                                <span className="text-base font-bold text-white/80 ml-0.5">°C</span>
+                              </div>
+                              <p className="text-white/90 text-[11px] font-semibold mt-1">{info.label}</p>
+                            </div>
+                            <span className="text-5xl leading-none drop-shadow-lg">{info.emoji}</span>
                           </div>
                         </div>
 
-                        {/* Suhu */}
-                        <div className="flex items-baseline gap-0.5 mb-1">
-                          <span className="text-3xl font-black text-gray-900">{pd.temp}</span>
-                          <span className="text-sm font-bold text-emerald-600">°C</span>
+                        {/* Bagian bawah putih — saran petani */}
+                        <div className="bg-white px-3 py-3 border-x border-b border-slate-100 rounded-b-3xl">
+                          <p className="text-[11px] text-gray-600 leading-relaxed">{tip}</p>
                         </div>
 
-                        {/* Kondisi */}
-                        <div className="flex items-center gap-1 mb-2">
-                          <span className="text-sm">{info.emoji}</span>
-                          <span className={`text-[11px] font-semibold ${info.color}`}>{info.label}</span>
-                        </div>
-
-                        {/* Peluang hujan */}
-                        {pd.rainProb > 0 && (
-                          <div className={`flex items-center gap-1 px-2 py-1 rounded-xl mb-2 ${highRain ? 'bg-blue-50' : medRain ? 'bg-amber-50' : 'bg-slate-50'}`}>
-                            <CloudRain className={`w-3 h-3 ${highRain ? 'text-blue-500' : medRain ? 'text-amber-500' : 'text-gray-400'}`} />
-                            <span className={`text-[10px] font-semibold ${highRain ? 'text-blue-600' : medRain ? 'text-amber-600' : 'text-gray-400'}`}>
-                              Hujan {pd.rainProb}%
-                            </span>
-                          </div>
-                        )}
-
-                        {/* Saran petani */}
-                        <p className="text-[10px] text-gray-500 leading-relaxed">{tip}</p>
                       </div>
                     );
                   })}
