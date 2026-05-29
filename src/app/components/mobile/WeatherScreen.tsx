@@ -336,7 +336,7 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                     <span className={`text-[9px] mt-0.5 ${isActive ? 'text-emerald-600' : 'text-gray-400'}`}>
                       {sub}
                     </span>
-                    <span className={`text-[9px] mt-1 font-semibold leading-tight text-center ${isActive ? 'text-emerald-700' : 'text-gray-500'}`}>
+                    <span className={`text-[9px] mt-1 font-bold leading-tight text-center ${isActive ? 'text-emerald-700' : 'text-gray-500'}`}>
                       {getShortWeatherLabel(day.siang.weatherCode)}
                     </span>
                   </button>
