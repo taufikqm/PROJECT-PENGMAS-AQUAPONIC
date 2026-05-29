@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ArrowLeft, Check, Lock, User, LogOut, Cloud, HardDrive, RefreshCw, ChevronLeft, ChevronRight, Sunrise, Sun, Sunset, PenLine } from 'lucide-react';
+import { ArrowLeft, Check, Lock, User, LogOut, Cloud, HardDrive, RefreshCw, ChevronLeft, ChevronRight, PenLine } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCloudSun, faSun, faCloudMoon } from '@fortawesome/free-solid-svg-icons';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { supabase } from '../../../lib/supabase';
 
@@ -472,7 +474,7 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
-              <Sunrise className="w-4 h-4 text-amber-600" />
+              <FontAwesomeIcon icon={faCloudSun} className="text-amber-500 text-base" />
             </div>
             <h3 className="text-gray-900 font-bold text-sm">Tugas Pagi</h3>
           </div>
@@ -488,7 +490,7 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
-              <Sun className="w-4 h-4 text-orange-500" />
+              <FontAwesomeIcon icon={faSun} className="text-orange-500 text-base" />
             </div>
             <h3 className="text-gray-900 font-bold text-sm">Tugas Siang</h3>
           </div>
@@ -504,7 +506,7 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
-              <Sunset className="w-4 h-4 text-indigo-500" />
+              <FontAwesomeIcon icon={faCloudMoon} className="text-indigo-500 text-base" />
             </div>
             <h3 className="text-gray-900 font-bold text-sm">Tugas Sore</h3>
           </div>
