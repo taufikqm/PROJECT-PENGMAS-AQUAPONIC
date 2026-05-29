@@ -30,10 +30,10 @@ interface DayData {
 }
 
 const PHASES: Array<{ key: PhaseKey; label: string; emoji: string; timeLabel: string; hour: number }> = [
-  { key: 'pagi',  label: 'Pagi',  emoji: '🌅', timeLabel: '05.00–10.00', hour: 7  },
-  { key: 'siang', label: 'Siang', emoji: '☀️', timeLabel: '10.00–14.00', hour: 12 },
-  { key: 'sore',  label: 'Sore',  emoji: '🌤️', timeLabel: '14.00–18.00', hour: 15 },
-  { key: 'malam', label: 'Malam', emoji: '🌙', timeLabel: '18.00–23.00', hour: 20 },
+  { key: 'pagi',  label: 'Pagi',  emoji: '🌅', timeLabel: '05.00–10.00 WIB', hour: 7  },
+  { key: 'siang', label: 'Siang', emoji: '☀️', timeLabel: '10.00–14.00 WIB', hour: 12 },
+  { key: 'sore',  label: 'Sore',  emoji: '🌤️', timeLabel: '14.00–18.00 WIB', hour: 15 },
+  { key: 'malam', label: 'Malam', emoji: '🌙', timeLabel: '18.00–23.00 WIB', hour: 20 },
 ];
 
 // Warna lembut per fase — jelas dibedakan, tidak mencolok
@@ -41,9 +41,9 @@ const PHASE_STYLES: Record<PhaseKey, {
   bgGrad: string; titleText: string; tempAccent: string;
   condText: string; badgeBg: string; badgeText: string; border: string;
 }> = {
-  pagi:  { bgGrad: 'from-amber-100 to-orange-50',  titleText: 'text-amber-800',  tempAccent: 'text-amber-600',  condText: 'text-amber-700',  badgeBg: 'bg-amber-200',  badgeText: 'text-amber-900',  border: 'border-amber-200'  },
+  pagi:  { bgGrad: 'from-sky-100 to-cyan-50',      titleText: 'text-sky-800',    tempAccent: 'text-sky-600',    condText: 'text-sky-700',    badgeBg: 'bg-sky-200',    badgeText: 'text-sky-900',    border: 'border-sky-200'    },
   siang: { bgGrad: 'from-orange-100 to-rose-50',   titleText: 'text-orange-800', tempAccent: 'text-orange-600', condText: 'text-orange-700', badgeBg: 'bg-orange-200', badgeText: 'text-orange-900', border: 'border-orange-200' },
-  sore:  { bgGrad: 'from-sky-100 to-cyan-50',      titleText: 'text-sky-800',    tempAccent: 'text-sky-600',    condText: 'text-sky-700',    badgeBg: 'bg-sky-200',    badgeText: 'text-sky-900',    border: 'border-sky-200'    },
+  sore:  { bgGrad: 'from-amber-100 to-orange-50',  titleText: 'text-amber-800',  tempAccent: 'text-amber-600',  condText: 'text-amber-700',  badgeBg: 'bg-amber-200',  badgeText: 'text-amber-900',  border: 'border-amber-200'  },
   malam: { bgGrad: 'from-indigo-100 to-violet-50', titleText: 'text-indigo-800', tempAccent: 'text-indigo-600', condText: 'text-indigo-700', badgeBg: 'bg-indigo-200', badgeText: 'text-indigo-900', border: 'border-indigo-200' },
 };
 
@@ -62,10 +62,10 @@ const getFarmerTip = (code: number, phase: PhaseKey): string => {
   const rainy = [51,53,55,61,63,65,80,81,82,95,96,99].includes(code);
   const clear = [0,1].includes(code);
   const tips: Record<PhaseKey, [string, string, string]> = {
-    pagi:  ['⚠️ Cek pH air — hujan bisa bikin air kolam asam', '✅ Waktu terbaik beri pakan & cek pompa', '🔍 Cek kondisi ikan & pastikan pompa lancar'],
-    siang: ['⚠️ Cek aerasi tetap jalan & kolam jangan meluap', '🌡️ Suhu paling tinggi! Pastikan aerasi maksimal', '🔍 Pantau suhu air, siang paling rawan panas'],
-    sore:  ['⚠️ Cek saluran tidak meluap, tunda panen dulu', '✅ Beri pakan sore & periksa daun tanaman', '🔍 Beri pakan sore & cek kebersihan filter'],
-    malam: ['⚠️ Pastikan kolam tidak meluap malam ini', '✅ Catat kondisi hari ini di buku harian', '🔍 Pastikan pompa aktif sepanjang malam'],
+    pagi:  ['Cek pH air — hujan bisa bikin air kolam asam', 'Waktu terbaik beri pakan & cek pompa', 'Cek kondisi ikan & pastikan pompa lancar'],
+    siang: ['Cek aerasi tetap jalan & kolam jangan meluap', 'Suhu paling tinggi! Pastikan aerasi maksimal', 'Pantau suhu air, siang paling rawan panas'],
+    sore:  ['Cek saluran tidak meluap, tunda panen dulu', 'Beri pakan sore & periksa daun tanaman', 'Beri pakan sore & cek kebersihan filter'],
+    malam: ['Pastikan kolam tidak meluap malam ini', 'Catat kondisi hari ini di buku harian', 'Pastikan pompa aktif sepanjang malam'],
   };
   return rainy ? tips[phase][0] : clear ? tips[phase][1] : tips[phase][2];
 };
@@ -359,7 +359,7 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                           <div className="flex items-start justify-between mb-3">
                             <div>
                               <p className={`${st.titleText} font-extrabold text-sm leading-tight`}>
-                                {phase.emoji} {phase.label}
+                                {phase.label}
                               </p>
                               <p className="text-gray-500 text-[10px]">{phase.timeLabel}</p>
                             </div>
