@@ -7,11 +7,13 @@ interface CalculatorScreenProps {
 }
 
 const fishTypes = [
-  { id: 'lele', name: 'Lele', density: 50 },
-  { id: 'nila', name: 'Nila', density: 40 },
-  { id: 'gurame', name: 'Gurame', density: 30 },
-  { id: 'patin', name: 'Patin', density: 45 },
-  { id: 'mas', name: 'Ikan Mas', density: 35 }
+  { id: 'lele',   name: 'Lele',           density_per_m3: 200, harvest_weight_kg: 0.3 },
+  { id: 'nila',   name: 'Nila',           density_per_m3: 125, harvest_weight_kg: 0.25 },
+  { id: 'mas',    name: 'Ikan Mas',       density_per_m3: 100, harvest_weight_kg: 0.3 },
+  { id: 'gurame', name: 'Gurame',         density_per_m3: 15,  harvest_weight_kg: 0.5 },
+  { id: 'patin',  name: 'Patin',          density_per_m3: 35,  harvest_weight_kg: 0.4 },
+  { id: 'mujair', name: 'Mujair',         density_per_m3: 90,  harvest_weight_kg: 0.2 },
+  { id: 'bawal',  name: 'Bawal Air Tawar',density_per_m3: 20,  harvest_weight_kg: 0.4 },
 ];
 
 export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
@@ -22,11 +24,53 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
   const [result, setResult] = useState<null | {
     volume: number;
     fishCount: number;
+    fishCountBeginner: number;
+    fishCount75: number;
     plantCount: number;
+    biomassaKg: number;
+    volumeEfektif: number;
+    isMujair: boolean;
     fishName?: string;
   }>(null);
 
   const [isLoading, setIsLoading] = useState(false);
+
+  // Rumus FAO — dipakai di path online maupun offline
+  const computeResult = (
+    l: number, w: number, h: number,
+    density_per_m3: number, harvest_weight_kg: number,
+    fishName: string
+  ) => {
+    const volume_liter  = l * w * h * 1000;
+    const V_efektif     = volume_liter * 0.85;          // 85% volume efektif
+    const V_efektif_m3  = V_efektif / 1000;
+
+    const fish_count_raw = Math.floor(V_efektif_m3 * density_per_m3);
+
+    // Hard cap biomassa FAO (20 kg/m³)
+    const batas_biomassa = V_efektif_m3 * 20;
+    const biomassa_check = fish_count_raw * harvest_weight_kg;
+    const fish_count = biomassa_check > batas_biomassa
+      ? Math.floor(batas_biomassa / harvest_weight_kg)
+      : fish_count_raw;
+
+    // Jumlah tanaman (FAO Feed Rate Ratio: 1 m² per 5 kg biomassa, 20 lubang/m²)
+    const biomassa_final = fish_count * harvest_weight_kg;
+    const area_tanam     = biomassa_final / 5;
+    const plant_count    = Math.round(area_tanam * 20);
+
+    return {
+      volume: volume_liter,
+      volumeEfektif: V_efektif,
+      fishCount: fish_count,
+      fishCountBeginner: Math.floor(fish_count * 0.5),
+      fishCount75: Math.floor(fish_count * 0.75),
+      plantCount: plant_count,
+      biomassaKg: biomassa_final,
+      isMujair: fishName.toLowerCase().includes('mujair'),
+      fishName,
+    };
+  };
 
   const calculate = async () => {
     const l = parseFloat(length);
@@ -40,47 +84,33 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
     setIsLoading(true);
     try {
-      // Ambil data ikan dari Supabase
+      // Ambil data ikan dari Supabase (kolom baru)
       const { data, error } = await supabase
         .from('fish_types')
-        .select('*')
+        .select('id, name, density_per_m3, harvest_weight_kg')
         .eq('id', fishType)
         .single();
 
       if (error) throw error;
 
-      // Hitung volume dalam liter
-      const volume_liter = l * w * h * 1000;
-      
-      // Hitung jumlah ikan dan tanaman
-      const liter_per_fish = data.liter_per_fish || 50; 
-      const fish_count = Math.floor(volume_liter / liter_per_fish);
-      const plant_count = Math.floor(fish_count * 1.5);
-
-      setResult({ 
-        volume: volume_liter, 
-        fishCount: fish_count, 
-        plantCount: plant_count,
-        fishName: data.name
-      });
+      setResult(computeResult(
+        l, w, h,
+        data.density_per_m3,
+        data.harvest_weight_kg,
+        data.name
+      ));
     } catch (error) {
-      alert('Gagal menghubungi Supabase. Tapi tenang, kita pakai kalkulator darurat (Offline Mode)!');
       console.error(error);
-      
-      // Fallback lokal jika internet mati (Offline Mode)
-      console.warn("Menggunakan kalkulator lokal (Offline Fallback)...");
-      const volume_liter = l * w * h * 1000;
+      console.warn('Menggunakan kalkulator lokal (Offline Fallback)...');
+
+      // Offline fallback — rumus identik via computeResult()
       const localFish = fishTypes.find(f => f.id === fishType);
-      const density = localFish?.density || 50;
-      const fish_count = Math.floor(volume_liter / density);
-      const plant_count = Math.floor(fish_count * 1.5);
-      
-      setResult({
-        volume: volume_liter,
-        fishCount: fish_count,
-        plantCount: plant_count,
-        fishName: localFish?.name
-      });
+      setResult(computeResult(
+        l, w, h,
+        localFish?.density_per_m3 ?? 125,
+        localFish?.harvest_weight_kg ?? 0.25,
+        localFish?.name ?? 'Ikan'
+      ));
     } finally {
       setIsLoading(false);
     }
