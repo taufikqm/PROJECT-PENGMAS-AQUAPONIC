@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowLeft, Fish, Sprout } from 'lucide-react';
+import { ArrowLeft, Fish, Sprout, Info } from 'lucide-react';
 
 interface CalculatorScreenProps {
   onBack: () => void;
@@ -363,8 +363,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
             {/* Credit Kepercayaan Standar Resmi */}
             <div className="flex items-start justify-center gap-2 py-4 border-t border-gray-100 mt-2 px-4">
-              <span className="text-sm mt-0.5" role="img" aria-label="shield">🛡️</span>
-              <p className="text-[10px] text-gray-400 text-center leading-relaxed font-medium max-w-xs">
+              <Info className="w-3.5 h-3.5 text-gray-400 mt-0.5 flex-shrink-0" />
+              <p className="text-[10px] text-gray-400 text-left leading-relaxed font-medium max-w-xs">
                 Kalkulasi & rekomendasi dirancang sesuai panduan resmi <span className="font-semibold text-gray-500">Organisasi Pangan dan Pertanian PBB (FAO)</span> serta standar <span className="font-semibold text-gray-500">Kementerian Kelautan dan Perikanan Republik Indonesia (KKP)</span>.
               </p>
             </div>
