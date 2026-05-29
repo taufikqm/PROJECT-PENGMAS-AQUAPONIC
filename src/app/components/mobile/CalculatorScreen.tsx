@@ -290,7 +290,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
             {/* Card utama hasil */}
             <div className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
               <h3 className="text-gray-900 mb-1">Hasilnya</h3>
-              <p className="text-xs text-gray-400 mb-4">Untuk kolam {result.volume.toLocaleString('id-ID')} liter · {result.fishName}</p>
+              <p className="text-xs text-gray-400 mb-4">Untuk kolam {result.volume.toLocaleString('id-ID')} liter, ikan {result.fishName}</p>
 
               <div className="space-y-3">
 
@@ -302,7 +302,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   </div>
                   <p className="text-3xl font-bold text-amber-900">{result.fishCountBeginner.toLocaleString('id-ID')} Ekor</p>
                   <p className="text-xs text-amber-700 mt-2 leading-relaxed">
-                    Tebar segini dulu sambil tunggu air kolam siap. Jangan langsung penuh — beri waktu 2 bulan agar bakteri di saringan terbentuk.
+                    Tebar segini dulu sambil tunggu air kolam siap. Jangan langsung penuh — beri waktu 2 bulan agar air kolam terbiasa dengan kotoran ikan sebelum ditambah lebih banyak.
                   </p>
                 </div>
 
@@ -326,7 +326,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   </div>
                   <p className="text-3xl font-bold text-red-900">{result.biomassaKg.toFixed(1)} kg berat total {result.fishName}</p>
                   <p className="text-xs text-red-700 mt-2 leading-relaxed">
-                    Kalau berat {result.fishName} di kolam sudah melebihi angka ini, ikan bisa kekurangan oksigen dan mati mendadak.
+                    Kalau berat {result.fishName} di kolam melebihi angka ini, ikan bisa megap-megap di permukaan lalu mati mendadak karena kekurangan oksigen.
                   </p>
                 </div>
 
@@ -342,10 +342,10 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                     {result.plantCount} {result.vegetableType === 'buah' ? 'Titik Tanam' : 'Lubang Tanam'}
                   </p>
                   <p className="text-xs text-green-700 mt-2 leading-relaxed">
-                    Sekitar {result.areaTanam.toFixed(1)} meter persegi area tanam.
+                    Butuh lahan seluas sekitar {result.areaTanam.toFixed(1)} meter persegi.
                     {result.vegetableType === 'buah'
-                      ? <> Cocok untuk <strong>tomat, terong, atau cabai</strong> — butuh lahan lebih luas tapi nilai jualnya lebih tinggi.</>  
-                      : <> Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — tumbuh subur dari kotoran {result.fishName} dan tidak butuh perawatan khusus.</>
+                      ? <> Cocok untuk <strong>tomat, terong, atau cabai</strong> — butuh lebih banyak tempat tapi harganya lebih mahal di pasar.</>
+                      : <> Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — tumbuh subur karena mendapat pupuk alami dari air kolam ikan.</>
                     }
                   </p>
                 </div>
@@ -363,7 +363,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   <div>
                     <p className="font-semibold">Minggu 1–4: Siapkan air kolam dulu</p>
                     <p className="text-blue-700 mt-0.5">
-                      Masukkan <strong>{result.fishCountStarter} ekor {result.fishName} kecil saja</strong> sebagai percobaan (sekitar 10% dari total). Jangan langsung banyak — biarkan 4 minggu sampai air tidak berbau dan jernih.
+                      Masukkan <strong>{result.fishCountStarter} ekor {result.fishName} kecil saja</strong> dulu (kira-kira sepersepuluh dari jumlah total nanti). Jangan langsung banyak — biarkan 4 minggu sampai air tidak berbau dan jernih.
                     </p>
                   </div>
                 </li>
@@ -371,21 +371,21 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">2</span>
                   <div>
                     <p className="font-semibold">Minggu 4–8: Tebar {result.fishName} pertama</p>
-                    <p className="text-blue-700 mt-0.5">Kalau air sudah tidak bau menyengat, tebar <strong>{result.fishCountBeginner} ekor</strong>. Amati kondisi air 2–3 hari setelah ditebar.</p>
+                    <p className="text-blue-700 mt-0.5">Kalau air sudah tidak bau menyengat, tebar <strong>{result.fishCountBeginner} ekor</strong>. Perhatikan apakah ikan terlihat aktif berenang dan tidak megap-megap 2–3 hari setelah ditebar.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">3</span>
                   <div>
                     <p className="font-semibold">Minggu 8–12: Tambah bertahap</p>
-                    <p className="text-blue-700 mt-0.5">Kalau {result.fishName} sehat dan air jernih, naikkan ke <strong>{result.fishCount75} ekor</strong>. Jangan tambah sekaligus, tambah sedikit-sedikit.</p>
+                    <p className="text-blue-700 mt-0.5">Kalau {result.fishName} terlihat sehat dan aktif, naikkan ke <strong>{result.fishCount75} ekor</strong>. Tambah sedikit-sedikit, jangan sekaligus.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="bg-emerald-200 text-emerald-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">✓</span>
                   <div>
                     <p className="font-semibold text-emerald-800">Bulan ke-3 ke atas: Kolam penuh</p>
-                    <p className="text-emerald-700 mt-0.5">Kolam siap diisi <strong>{result.fishCount} ekor</strong> {result.fishName} penuh. Pantau terus agar ikan tidak berdesakan.</p>
+                    <p className="text-emerald-700 mt-0.5">Kolam siap diisi <strong>{result.fishCount} ekor</strong> {result.fishName} penuh. Pantau terus agar ikan tidak berdesakan dan masih mau makan dengan baik.</p>
                   </div>
                 </li>
               </ul>
