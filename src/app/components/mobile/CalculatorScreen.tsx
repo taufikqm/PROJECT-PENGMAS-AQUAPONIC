@@ -362,10 +362,10 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
             </div>
 
             {/* Credit Kepercayaan Standar Resmi */}
-            <div className="flex items-center justify-center gap-1.5 py-4 border-t border-gray-100 mt-2">
-              <span className="text-xs">🛡️</span>
-              <p className="text-[11px] text-gray-400 text-center leading-relaxed font-medium">
-                Kalkulasi & rekomendasi telah memenuhi standar <span className="font-semibold text-gray-500">FAO (PBB)</span> & <span className="font-semibold text-gray-500">KKP RI</span>.
+            <div className="flex items-start justify-center gap-2 py-4 border-t border-gray-100 mt-2 px-4">
+              <span className="text-sm mt-0.5" role="img" aria-label="shield">🛡️</span>
+              <p className="text-[10px] text-gray-400 text-center leading-relaxed font-medium max-w-xs">
+                Kalkulasi & rekomendasi dirancang sesuai panduan resmi <span className="font-semibold text-gray-500">Organisasi Pangan dan Pertanian PBB (FAO)</span> serta standar <span className="font-semibold text-gray-500">Kementerian Kelautan dan Perikanan Republik Indonesia (KKP)</span>.
               </p>
             </div>
 
