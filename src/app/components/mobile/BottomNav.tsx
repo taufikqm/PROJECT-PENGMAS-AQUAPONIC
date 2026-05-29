@@ -55,7 +55,7 @@ export function BottomNav({ currentPage, onNavigate }: BottomNavProps) {
                 }`}
               >
                 {isActive && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-emerald-600 rounded-b-full" />
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-10 h-[3px] bg-emerald-600 rounded-t-full" />
                 )}
                 <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5]' : 'stroke-[1.8]'}`} />
                 <span className={`text-[10px] leading-none ${isActive ? 'font-semibold' : ''}`}>
