@@ -405,10 +405,10 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                           const maxRain = Math.max(selDay.pagi.rainProb, selDay.siang.rainProb, selDay.sore.rainProb, selDay.malam.rainProb);
                           const maxTemp = Math.max(selDay.pagi.temp, selDay.siang.temp, selDay.sore.temp);
                           const tips: string[] = [];
-                          if (maxRain >= 60)      tips.push('⛈️ Peluang hujan besar. Siapkan penutup kolam & cek saluran pembuangan agar tidak meluap.');
-                          else if (maxRain >= 30) tips.push('🌦️ Ada kemungkinan hujan. Pantau pH air setelah hujan & pastikan filter tidak tersumbat.');
-                          if (maxTemp >= 32)      tips.push('🌡️ Suhu siang diprediksi panas. Pastikan aerasi & sirkulasi air berjalan maksimal.');
-                          if (!tips.length)       tips.push('✅ Cuaca kondusif hari ini. Lakukan rutinitas pagi dan sore seperti biasa — ikan & tanaman aman.');
+                          if (maxRain >= 60)      tips.push('Peluang hujan besar. Siapkan penutup kolam & cek saluran pembuangan agar tidak meluap.');
+                          else if (maxRain >= 30) tips.push('Ada kemungkinan hujan. Pantau pH air setelah hujan & pastikan filter tidak tersumbat.');
+                          if (maxTemp >= 32)      tips.push('Suhu siang diprediksi panas. Pastikan aerasi & sirkulasi air berjalan maksimal.');
+                          if (!tips.length)       tips.push('Cuaca kondusif hari ini. Lakukan rutinitas pagi dan sore seperti biasa ikan & tanaman aman.');
                           return tips.map((t, i) => (
                             <p key={i} className="text-xs text-emerald-800 leading-relaxed mb-1 last:mb-0">{t}</p>
                           ));
