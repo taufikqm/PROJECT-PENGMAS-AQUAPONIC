@@ -36,12 +36,15 @@ const PHASES: Array<{ key: PhaseKey; label: string; emoji: string; timeLabel: st
   { key: 'malam', label: 'Malam', emoji: '🌙', timeLabel: '18.00–23.00', hour: 20 },
 ];
 
-// Warna gradient unik per fase — intuitif & kontras
-const PHASE_STYLES: Record<PhaseKey, { gradient: string; badge: string }> = {
-  pagi:  { gradient: 'from-amber-400 via-yellow-400 to-orange-400',    badge: 'bg-black/15' },
-  siang: { gradient: 'from-orange-500 via-red-400 to-rose-500',        badge: 'bg-black/15' },
-  sore:  { gradient: 'from-sky-400 via-cyan-400 to-teal-500',          badge: 'bg-black/15' },
-  malam: { gradient: 'from-indigo-600 via-violet-600 to-slate-700',    badge: 'bg-black/20' },
+// Warna lembut per fase — jelas dibedakan, tidak mencolok
+const PHASE_STYLES: Record<PhaseKey, {
+  bgGrad: string; titleText: string; tempAccent: string;
+  condText: string; badgeBg: string; badgeText: string; border: string;
+}> = {
+  pagi:  { bgGrad: 'from-amber-100 to-orange-50',  titleText: 'text-amber-800',  tempAccent: 'text-amber-600',  condText: 'text-amber-700',  badgeBg: 'bg-amber-200',  badgeText: 'text-amber-900',  border: 'border-amber-200'  },
+  siang: { bgGrad: 'from-orange-100 to-rose-50',   titleText: 'text-orange-800', tempAccent: 'text-orange-600', condText: 'text-orange-700', badgeBg: 'bg-orange-200', badgeText: 'text-orange-900', border: 'border-orange-200' },
+  sore:  { bgGrad: 'from-sky-100 to-cyan-50',      titleText: 'text-sky-800',    tempAccent: 'text-sky-600',    condText: 'text-sky-700',    badgeBg: 'bg-sky-200',    badgeText: 'text-sky-900',    border: 'border-sky-200'    },
+  malam: { bgGrad: 'from-indigo-100 to-violet-50', titleText: 'text-indigo-800', tempAccent: 'text-indigo-600', condText: 'text-indigo-700', badgeBg: 'bg-indigo-200', badgeText: 'text-indigo-900', border: 'border-indigo-200' },
 };
 
 const getWeatherInfo = (code: number) => {
@@ -349,38 +352,38 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                     const tip  = getFarmerTip(pd.weatherCode, phase.key);
                     const st   = PHASE_STYLES[phase.key];
                     return (
-                      <div key={phase.key} className="rounded-3xl overflow-hidden shadow-md">
+                      <div key={phase.key} className={`rounded-3xl overflow-hidden shadow-sm border ${st.border}`}>
 
-                        {/* Bagian atas berwarna — suhu & kondisi */}
-                        <div className={`bg-gradient-to-br ${st.gradient} px-4 pt-4 pb-5 relative`}>
-                          {/* Nama fase & jam */}
+                        {/* Bagian atas — latar pastel, teks gelap */}
+                        <div className={`bg-gradient-to-br ${st.bgGrad} px-4 pt-4 pb-5`}>
                           <div className="flex items-start justify-between mb-3">
                             <div>
-                              <p className="text-white font-extrabold text-sm leading-tight">{phase.emoji} {phase.label}</p>
-                              <p className="text-white/70 text-[10px]">{phase.timeLabel}</p>
+                              <p className={`${st.titleText} font-extrabold text-sm leading-tight`}>
+                                {phase.emoji} {phase.label}
+                              </p>
+                              <p className="text-gray-500 text-[10px]">{phase.timeLabel}</p>
                             </div>
                             {pd.rainProb > 0 && (
-                              <span className={`${st.badge} px-2 py-0.5 rounded-full text-white text-[10px] font-bold`}>
+                              <span className={`${st.badgeBg} ${st.badgeText} px-2 py-0.5 rounded-full text-[10px] font-bold`}>
                                 🌧 {pd.rainProb}%
                               </span>
                             )}
                           </div>
 
-                          {/* Suhu besar + emoji cuaca */}
                           <div className="flex items-end justify-between">
                             <div>
                               <div className="flex items-baseline leading-none">
-                                <span className="text-4xl font-black text-white tracking-tight">{pd.temp}</span>
-                                <span className="text-base font-bold text-white/80 ml-0.5">°C</span>
+                                <span className="text-4xl font-black text-gray-800 tracking-tight">{pd.temp}</span>
+                                <span className={`text-base font-bold ml-0.5 ${st.tempAccent}`}>°C</span>
                               </div>
-                              <p className="text-white/90 text-[11px] font-semibold mt-1">{info.label}</p>
+                              <p className={`text-[11px] font-semibold ${st.condText} mt-1`}>{info.label}</p>
                             </div>
-                            <span className="text-5xl leading-none drop-shadow-lg">{info.emoji}</span>
+                            <span className="text-5xl leading-none">{info.emoji}</span>
                           </div>
                         </div>
 
                         {/* Bagian bawah putih — saran petani */}
-                        <div className="bg-white px-3 py-3 border-x border-b border-slate-100 rounded-b-3xl">
+                        <div className="bg-white px-3 py-3 border-t border-gray-100">
                           <p className="text-[11px] text-gray-600 leading-relaxed">{tip}</p>
                         </div>
 
