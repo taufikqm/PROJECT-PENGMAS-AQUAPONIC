@@ -24,6 +24,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
   const [result, setResult] = useState<null | {
     volume: number;
     fishCount: number;
+    fishCountStarter: number;
     fishCountBeginner: number;
     fishCount75: number;
     plantCount: number;
@@ -65,8 +66,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
       volume: volume_liter,
       volumeEfektif: V_efektif,
       fishCount: fish_count,
-      fishCountBeginner: Math.floor(fish_count * 0.5),
-      fishCount75: Math.floor(fish_count * 0.75),
+      fishCountStarter: Math.max(1, Math.ceil(fish_count * 0.10)),   // 10% — fase persiapan air
+      fishCountBeginner: Math.floor(fish_count * 0.5),               // 50%
+      fishCount75: Math.floor(fish_count * 0.75),                    // 75%
       plantCount: plant_count,
       biomassaKg: biomassa_final,
       isMujair: fishName.toLowerCase().includes('mujair'),
@@ -307,7 +309,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">1</span>
                   <div>
                     <p className="font-semibold">Minggu 1–4: Siapkan air kolam dulu</p>
-                    <p className="text-blue-700 mt-0.5">Masukkan <strong>2–3 ekor {result.fishName} kecil saja</strong> sebagai percobaan. Jangan langsung banyak. Biarkan 4 minggu sampai air tidak berbau dan jernih.</p>
+                    <p className="text-blue-700 mt-0.5">
+                      Masukkan <strong>{result.fishCountStarter} ekor {result.fishName} kecil saja</strong> sebagai percobaan (sekitar 10% dari total). Jangan langsung banyak — biarkan 4 minggu sampai air tidak berbau dan jernih.
+                    </p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
