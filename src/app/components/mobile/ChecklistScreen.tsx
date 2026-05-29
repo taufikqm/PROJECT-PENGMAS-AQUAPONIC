@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ArrowLeft, Check, Lock, User, LogOut, Cloud, HardDrive, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Check, Lock, User, LogOut, Cloud, HardDrive, RefreshCw, ChevronLeft, ChevronRight, Sunrise, Sun, Sunset, PenLine } from 'lucide-react';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { supabase } from '../../../lib/supabase';
 
@@ -469,13 +469,15 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
 
       {/* === TUGAS PAGI === */}
       <div className="px-4 mb-5">
-        <div className="flex items-center justify-between mb-3 pl-1">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-amber-500 rounded-full animate-ping" />
-            <h3 className="text-gray-900 font-bold text-sm">🌅 Tugas Pagi Hari</h3>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-amber-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Sunrise className="w-4 h-4 text-amber-600" />
+            </div>
+            <h3 className="text-gray-900 font-bold text-sm">Tugas Pagi</h3>
           </div>
           {isMorningComplete && (
-            <span className="bg-amber-100 text-amber-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">🌅 Sesi Pagi Tuntas!</span>
+            <span className="bg-amber-100 text-amber-700 text-[10px] font-semibold px-2.5 py-1 rounded-full">Pagi Tuntas</span>
           )}
         </div>
         <div className="space-y-2">{morningTasks.map(renderTaskItem)}</div>
@@ -483,13 +485,15 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
 
       {/* === TUGAS SIANG === */}
       <div className="px-4 mb-5">
-        <div className="flex items-center justify-between mb-3 pl-1">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-yellow-400 rounded-full animate-ping" />
-            <h3 className="text-gray-900 font-bold text-sm">☀️ Tugas Siang Hari</h3>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Sun className="w-4 h-4 text-orange-500" />
+            </div>
+            <h3 className="text-gray-900 font-bold text-sm">Tugas Siang</h3>
           </div>
           {isNoonComplete && (
-            <span className="bg-yellow-100 text-yellow-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">☀️ Sesi Siang Tuntas!</span>
+            <span className="bg-orange-100 text-orange-700 text-[10px] font-semibold px-2.5 py-1 rounded-full">Siang Tuntas</span>
           )}
         </div>
         <div className="space-y-2">{noonTasks.map(renderTaskItem)}</div>
@@ -497,13 +501,15 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
 
       {/* === TUGAS SORE === */}
       <div className="px-4 mb-5">
-        <div className="flex items-center justify-between mb-3 pl-1">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-orange-500 rounded-full animate-ping" />
-            <h3 className="text-gray-900 font-bold text-sm">🌙 Tugas Sore Hari</h3>
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 bg-indigo-100 rounded-xl flex items-center justify-center flex-shrink-0">
+              <Sunset className="w-4 h-4 text-indigo-500" />
+            </div>
+            <h3 className="text-gray-900 font-bold text-sm">Tugas Sore</h3>
           </div>
           {isEveningComplete && (
-            <span className="bg-orange-100 text-orange-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm">🌙 Sesi Sore Tuntas!</span>
+            <span className="bg-indigo-100 text-indigo-700 text-[10px] font-semibold px-2.5 py-1 rounded-full">Sore Tuntas</span>
           )}
         </div>
         <div className="space-y-2">{eveningTasks.map(renderTaskItem)}</div>
@@ -512,11 +518,23 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
       {/* Catatan Harian */}
       <div className="px-4">
         <div className="bg-white rounded-3xl p-5 shadow-lg border border-gray-100">
-          <div className="flex items-center gap-2 mb-3 pl-1">
-            <span className="text-lg">📓</span>
-            <h3 className="text-gray-900 font-bold text-sm">
-              {isPastDate ? 'Buku Catatan Terkunci' : 'Buku Catatan Hari Ini'}
-            </h3>
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2.5">
+              <div className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${isPastDate ? 'bg-gray-100' : 'bg-teal-100'}`}>
+                <PenLine className={`w-4 h-4 ${isPastDate ? 'text-gray-400' : 'text-teal-600'}`} />
+              </div>
+              <div>
+                <h3 className="text-gray-900 font-bold text-sm">
+                  {isPastDate ? 'Catatan Tersimpan' : 'Catatan Hari Ini'}
+                </h3>
+                <p className="text-[10px] text-gray-400">
+                  {isPastDate ? 'Hanya bisa dibaca, tidak bisa diubah' : 'Tersimpan otomatis'}
+                </p>
+              </div>
+            </div>
+            {isPastDate && (
+              <Lock className="w-4 h-4 text-gray-300 flex-shrink-0" />
+            )}
           </div>
           <textarea
             value={notes}
@@ -524,10 +542,10 @@ export function ChecklistScreen({ onBack }: ChecklistScreenProps) {
             disabled={isPastDate}
             placeholder={
               isPastDate
-                ? 'Tidak ada catatan tertulis pada tanggal ini.'
+                ? 'Tidak ada catatan pada tanggal ini.'
                 : 'Tulis yang penting hari ini... (Contoh: Air kolam agak keruh, tanaman kangkung tumbuh subur)'
             }
-            className="w-full h-28 px-4 py-3 border border-gray-300 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm leading-relaxed text-gray-800 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed"
+            className="w-full h-28 px-4 py-3 border border-gray-200 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-teal-400 text-sm leading-relaxed text-gray-800 disabled:bg-gray-50 disabled:text-gray-500 disabled:cursor-not-allowed bg-slate-50"
           />
         </div>
       </div>
