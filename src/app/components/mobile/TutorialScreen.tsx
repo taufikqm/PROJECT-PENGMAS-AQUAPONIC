@@ -181,7 +181,7 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
     const DetailIcon = module.icon;
     return (
       <div className="min-h-screen bg-white pb-20 animate-in fade-in slide-in-from-bottom-4 duration-300">
-        <div className={`${module.color} px-4 pt-4 pb-8 text-white rounded-b-3xl shadow-sm`}>
+        <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-4 pt-4 pb-8 text-white rounded-b-3xl shadow-sm">
           <button
             onClick={() => setActiveModule(null)}
             className="flex items-center gap-2 mb-6 active:opacity-70"
@@ -216,7 +216,7 @@ export function TutorialScreen({ onBack }: TutorialScreenProps) {
   return (
     <div className="min-h-screen pb-20 bg-gray-50/50">
       {/* Header */}
-      <div className="bg-emerald-600 px-4 pt-4 pb-5 rounded-b-3xl shadow-sm">
+      <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-4 pt-4 pb-5 rounded-b-3xl shadow-sm">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-white mb-4 active:opacity-70"

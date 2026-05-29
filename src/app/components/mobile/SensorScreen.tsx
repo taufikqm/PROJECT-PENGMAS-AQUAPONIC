@@ -167,7 +167,7 @@ export function SensorScreen({ onBack }: SensorScreenProps) {
   return (
     <div className="min-h-screen pb-20">
       {/* Header */}
-      <div className="bg-blue-600 px-4 pt-4 pb-5">
+      <div className="bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-500 px-4 pt-4 pb-5">
         <button
           onClick={onBack}
           className="flex items-center gap-2 text-white mb-3 active:opacity-70"
