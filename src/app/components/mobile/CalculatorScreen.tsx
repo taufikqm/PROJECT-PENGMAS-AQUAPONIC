@@ -127,8 +127,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
           <ArrowLeft className="w-5 h-5" />
           <span>Kembali</span>
         </button>
-        <h1 className="text-2xl text-white mb-1">Jumlah Ikan yang Cocok</h1>
-        <p className="text-cyan-100 text-sm">Berapa ikan yang pas</p>
+        <h1 className="text-2xl text-white mb-1">Hitung Isi Kolam Lele</h1>
+        <p className="text-cyan-100 text-sm">Berapa ekor yang aman untuk kolam kamu?</p>
       </div>
 
       {/* Info */}
@@ -137,9 +137,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
           <div className="flex items-start gap-3">
             <span className="text-2xl">📐</span>
             <div>
-              <h4 className="text-cyan-900 mb-1">Penjelasan</h4>
+              <h4 className="text-cyan-900 mb-1">Cara pakai</h4>
               <p className="text-sm text-cyan-800">
-                Hitung berapa ikan yang pas untuk ukuran kolam kamu
+                Masukkan ukuran kolam kamu, pilih jenis ikan, lalu tekan Hitung. Nanti akan muncul berapa ekor ikan yang aman dan sayuran apa yang bisa ikut ditanam.
               </p>
             </div>
           </div>
@@ -182,7 +182,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
             <div>
               <label className="block text-sm text-gray-700 mb-2">
-                Tinggi Air (meter)
+                Tinggi Air di Dalam Kolam (meter)
+                <span className="block text-xs text-gray-400 font-normal mt-0.5">Ukur dari dasar kolam sampai permukaan air, bukan tinggi dinding kolam</span>
               </label>
               <input
                 type="number"
@@ -230,85 +231,101 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
               <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-4 shadow-sm flex items-start gap-3">
                 <span className="text-xl flex-shrink-0">⚠️</span>
                 <p className="text-sm text-yellow-800 leading-relaxed">
-                  Data akuaponik mujair terbatas. Angka ini menggunakan parameter ikan nila sebagai proxy ilmiah.
+                  Data khusus mujair masih terbatas. Angka di bawah dihitung berdasarkan patokan ikan nila yang sifatnya mirip — sudah aman dipakai sebagai acuan awal.
                 </p>
               </div>
             )}
 
             {/* Card utama hasil */}
             <div className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
-              <h3 className="text-gray-900 mb-4">Hasilnya</h3>
+              <h3 className="text-gray-900 mb-1">Hasilnya</h3>
+              <p className="text-xs text-gray-400 mb-4">Untuk kolam {result.volume.toLocaleString('id-ID')} liter · {result.fishName}</p>
 
               <div className="space-y-3">
-                {/* Volume */}
-                <div className="bg-blue-50 rounded-xl p-4">
-                  <p className="text-sm text-blue-800 mb-1">Volume Kolam</p>
-                  <p className="text-3xl text-blue-900">{result.volume.toLocaleString('id-ID')} Liter</p>
-                </div>
 
-                {/* Card ikan 1 — Awal Tebar */}
+                {/* Card ikan 1 — Mulai pertama */}
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1">
                     <Fish className="w-5 h-5 text-amber-600" />
-                    <p className="text-sm font-medium text-amber-800">Awal Tebar (Minggu 4–6)</p>
+                    <p className="text-sm font-semibold text-amber-800">Jumlah Lele untuk 2 Bulan Pertama</p>
                   </div>
-                  <p className="text-3xl text-amber-900">{result.fishCountBeginner.toLocaleString('id-ID')} Ekor</p>
-                  <p className="text-xs text-amber-700 mt-1">Mulai dari sini setelah sistem cycling</p>
+                  <p className="text-3xl font-bold text-amber-900">{result.fishCountBeginner.toLocaleString('id-ID')} Ekor</p>
+                  <p className="text-xs text-amber-700 mt-2 leading-relaxed">
+                    Tebar segini dulu sambil tunggu air kolam siap. Jangan langsung penuh — beri waktu 2 bulan agar bakteri di saringan terbentuk.
+                  </p>
                 </div>
 
-                {/* Card ikan 2 — Kapasitas Penuh */}
+                {/* Card ikan 2 — Setelah stabil */}
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1">
                     <Fish className="w-5 h-5 text-emerald-600" />
-                    <p className="text-sm font-medium text-emerald-800">Kapasitas Penuh (Minggu 8+)</p>
+                    <p className="text-sm font-semibold text-emerald-800">Lele Saat Kolam Sudah Stabil</p>
                   </div>
-                  <p className="text-3xl text-emerald-900">{result.fishCount.toLocaleString('id-ID')} Ekor</p>
-                  <p className="text-xs text-emerald-700 mt-1">{result.fishName}</p>
+                  <p className="text-3xl font-bold text-emerald-900">{result.fishCount.toLocaleString('id-ID')} Ekor</p>
+                  <p className="text-xs text-emerald-700 mt-2 leading-relaxed">
+                    Ini jumlah ideal saat air sudah jernih dan tidak bau. Biasanya tercapai setelah 2–3 bulan berjalan.
+                  </p>
                 </div>
 
-                {/* Card ikan 3 — Batas Maksimum FAO */}
+                {/* Card ikan 3 — Batas aman */}
                 <div className="bg-red-50 border border-red-200 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
+                  <div className="flex items-center gap-2 mb-1">
                     <Fish className="w-5 h-5 text-red-500" />
-                    <p className="text-sm font-medium text-red-800">Batas Maksimum FAO</p>
+                    <p className="text-sm font-semibold text-red-800">⚠️ Batas Aman — Jangan Lewati Ini</p>
                   </div>
-                  <p className="text-3xl text-red-900">{result.biomassaKg.toFixed(1)} kg biomassa</p>
-                  <p className="text-xs text-red-700 mt-1">Jangan melebihi batas ini</p>
+                  <p className="text-3xl font-bold text-red-900">{result.biomassaKg.toFixed(1)} kg berat total lele</p>
+                  <p className="text-xs text-red-700 mt-2 leading-relaxed">
+                    Kalau berat lele di kolam sudah melebihi angka ini, ikan bisa kekurangan oksigen dan mati mendadak.
+                  </p>
                 </div>
 
                 {/* Tanaman */}
-                <div className="bg-green-50 rounded-xl p-4">
-                  <div className="flex items-center gap-2 mb-2">
+                <div className="bg-green-50 border border-green-200 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-1">
                     <Sprout className="w-5 h-5 text-green-600" />
-                    <p className="text-sm font-medium text-green-800">Jumlah Tanaman</p>
+                    <p className="text-sm font-semibold text-green-800">Sayuran yang Bisa Ditanam</p>
                   </div>
-                  <p className="text-3xl text-green-900">{result.plantCount} Lubang</p>
-                  <p className="text-xs text-green-700 mt-1">
-                    ≈ {(result.plantCount / 20).toFixed(1)} m² area tanam &nbsp;·&nbsp; Kangkung, selada, pakcoy
+                  <p className="text-3xl font-bold text-green-900">{result.plantCount} Lubang Tanam</p>
+                  <p className="text-xs text-green-700 mt-2 leading-relaxed">
+                    Sekitar {(result.plantCount / 20).toFixed(0)} meter persegi area tanam. Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — ketiganya tumbuh subur dari kotoran lele dan tidak butuh perawatan khusus.
                   </p>
                 </div>
+
               </div>
             </div>
 
-            {/* Panduan Pengisian Bertahap */}
-            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 shadow-sm">
-              <h4 className="text-blue-900 font-semibold mb-3">📋 Panduan Pengisian Bertahap</h4>
-              <ul className="space-y-2 text-sm text-blue-800">
-                <li className="flex items-start gap-2">
-                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 0–4:</span>
-                  <span>Isi 1–3 ekor ikan indikator saja (cycling bakteri)</span>
+            {/* Panduan langkah demi langkah */}
+            <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 shadow-sm">
+              <h4 className="text-blue-900 font-semibold mb-1">📅 Cara Memulai, Langkah demi Langkah</h4>
+              <p className="text-xs text-blue-600 mb-4">Ikuti urutan ini agar ikan tidak stres dan mati di awal</p>
+              <ul className="space-y-3 text-sm text-blue-800">
+                <li className="flex items-start gap-3">
+                  <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">1</span>
+                  <div>
+                    <p className="font-semibold">Minggu 1–4: Siapkan air kolam dulu</p>
+                    <p className="text-blue-700 mt-0.5">Masukkan <strong>2–3 ekor lele kecil saja</strong> sebagai percobaan. Jangan langsung banyak. Biarkan 4 minggu sampai air tidak berbau dan jernih.</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 4–6:</span>
-                  <span>Tebar <strong>{result.fishCountBeginner}</strong> ekor — cek amonia &lt;0,5 ppm dulu</span>
+                <li className="flex items-start gap-3">
+                  <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">2</span>
+                  <div>
+                    <p className="font-semibold">Minggu 4–8: Tebar lele pertama</p>
+                    <p className="text-blue-700 mt-0.5">Kalau air sudah tidak bau menyengat, tebar <strong>{result.fishCountBeginner} ekor</strong>. Amati kondisi air 2–3 hari setelah ditebar.</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 6–8:</span>
-                  <span>Naikkan ke <strong>{result.fishCount75}</strong> ekor jika air tetap jernih</span>
+                <li className="flex items-start gap-3">
+                  <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">3</span>
+                  <div>
+                    <p className="font-semibold">Minggu 8–12: Tambah bertahap</p>
+                    <p className="text-blue-700 mt-0.5">Kalau lele sehat dan air jernih, naikkan ke <strong>{result.fishCount75} ekor</strong>. Jangan tambah sekaligus, tambah sedikit-sedikit.</p>
+                  </div>
                 </li>
-                <li className="flex items-start gap-2">
-                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 8+:</span>
-                  <span>Kapasitas penuh <strong>{result.fishCount}</strong> ekor</span>
+                <li className="flex items-start gap-3">
+                  <span className="bg-emerald-200 text-emerald-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">✓</span>
+                  <div>
+                    <p className="font-semibold text-emerald-800">Bulan ke-3 ke atas: Kolam penuh</p>
+                    <p className="text-emerald-700 mt-0.5">Kolam siap diisi <strong>{result.fishCount} ekor</strong> lele penuh. Pantau terus agar ikan tidak berdesakan.</p>
+                  </div>
                 </li>
               </ul>
             </div>
