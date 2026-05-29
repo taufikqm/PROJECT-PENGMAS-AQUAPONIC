@@ -376,11 +376,6 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                               </p>
                               <p className="text-gray-500 text-[10px]">{phase.timeLabel}</p>
                             </div>
-                            {pd.rainProb > 0 && (
-                              <span className={`${st.badgeBg} ${st.badgeText} px-2 py-0.5 rounded-full text-[10px] font-bold`}>
-                                🌧 {pd.rainProb}%
-                              </span>
-                            )}
                           </div>
 
                           <div className="flex items-end justify-between">
@@ -403,6 +398,36 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                       </div>
                     );
                   })}
+                </div>
+
+                {/* Kartu Potensi Hujan */}
+                <div className="bg-white rounded-3xl p-5 shadow-sm border border-blue-100">
+                  <div className="flex items-center gap-2 mb-4">
+                    <h4 className="text-gray-800 font-bold text-sm">Potensi Hujan per Fase</h4>
+                  </div>
+                  <div className="space-y-3">
+                    {PHASES.map(phase => {
+                      const prob = selDay[phase.key].rainProb;
+                      const level = prob >= 51
+                        ? { label: 'Siaga',   textColor: 'text-red-600',     barColor: 'bg-red-400',     trackColor: 'bg-red-100'     }
+                        : prob >= 21
+                        ? { label: 'Waspada', textColor: 'text-amber-600',   barColor: 'bg-amber-400',   trackColor: 'bg-amber-100'   }
+                        : { label: 'Aman',    textColor: 'text-emerald-600', barColor: 'bg-emerald-400', trackColor: 'bg-emerald-100' };
+                      return (
+                        <div key={phase.key} className="flex items-center gap-3">
+                          <span className="text-xs font-semibold text-gray-600 w-10 flex-shrink-0">{phase.label}</span>
+                          <div className={`flex-1 h-2 rounded-full ${level.trackColor}`}>
+                            <div
+                              className={`h-2 rounded-full ${level.barColor}`}
+                              style={{ width: `${Math.max(prob, 2)}%` }}
+                            />
+                          </div>
+                          <span className={`text-xs font-bold w-7 text-right ${level.textColor}`}>{prob}%</span>
+                          <span className={`text-[10px] font-semibold w-12 ${level.textColor}`}>{level.label}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {/* Ringkasan saran harian */}
