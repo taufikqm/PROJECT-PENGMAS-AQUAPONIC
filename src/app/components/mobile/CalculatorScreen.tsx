@@ -224,47 +224,95 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
         {/* Result */}
         {result && (
           <div className="space-y-3">
+
+            {/* Banner mujair */}
+            {result.isMujair && (
+              <div className="bg-yellow-50 border border-yellow-300 rounded-2xl p-4 shadow-sm flex items-start gap-3">
+                <span className="text-xl flex-shrink-0">⚠️</span>
+                <p className="text-sm text-yellow-800 leading-relaxed">
+                  Data akuaponik mujair terbatas. Angka ini menggunakan parameter ikan nila sebagai proxy ilmiah.
+                </p>
+              </div>
+            )}
+
+            {/* Card utama hasil */}
             <div className="bg-white rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow border border-gray-100">
               <h3 className="text-gray-900 mb-4">Hasilnya</h3>
 
               <div className="space-y-3">
+                {/* Volume */}
                 <div className="bg-blue-50 rounded-xl p-4">
                   <p className="text-sm text-blue-800 mb-1">Volume Kolam</p>
                   <p className="text-3xl text-blue-900">{result.volume.toLocaleString('id-ID')} Liter</p>
                 </div>
 
-                <div className="bg-emerald-50 rounded-xl p-4">
+                {/* Card ikan 1 — Awal Tebar */}
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
-                    <Fish className="w-5 h-5 text-emerald-600" />
-                    <p className="text-sm text-emerald-800">Jumlah Ikan</p>
+                    <Fish className="w-5 h-5 text-amber-600" />
+                    <p className="text-sm font-medium text-amber-800">Awal Tebar (Minggu 4–6)</p>
                   </div>
-                  <p className="text-3xl text-emerald-900">{result.fishCount.toLocaleString('id-ID')} Ekor</p>
-                  <p className="text-xs text-emerald-700 mt-1">
-                    {result.fishName || fishTypes.find(f => f.id === fishType)?.name}
-                  </p>
+                  <p className="text-3xl text-amber-900">{result.fishCountBeginner.toLocaleString('id-ID')} Ekor</p>
+                  <p className="text-xs text-amber-700 mt-1">Mulai dari sini setelah sistem cycling</p>
                 </div>
 
+                {/* Card ikan 2 — Kapasitas Penuh */}
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Fish className="w-5 h-5 text-emerald-600" />
+                    <p className="text-sm font-medium text-emerald-800">Kapasitas Penuh (Minggu 8+)</p>
+                  </div>
+                  <p className="text-3xl text-emerald-900">{result.fishCount.toLocaleString('id-ID')} Ekor</p>
+                  <p className="text-xs text-emerald-700 mt-1">{result.fishName}</p>
+                </div>
+
+                {/* Card ikan 3 — Batas Maksimum FAO */}
+                <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Fish className="w-5 h-5 text-red-500" />
+                    <p className="text-sm font-medium text-red-800">Batas Maksimum FAO</p>
+                  </div>
+                  <p className="text-3xl text-red-900">{result.biomassaKg.toFixed(1)} kg biomassa</p>
+                  <p className="text-xs text-red-700 mt-1">Jangan melebihi batas ini</p>
+                </div>
+
+                {/* Tanaman */}
                 <div className="bg-green-50 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
                     <Sprout className="w-5 h-5 text-green-600" />
-                    <p className="text-sm text-green-800">Jumlah Tanaman</p>
+                    <p className="text-sm font-medium text-green-800">Jumlah Tanaman</p>
                   </div>
                   <p className="text-3xl text-green-900">{result.plantCount} Lubang</p>
                   <p className="text-xs text-green-700 mt-1">
-                    Kangkung, selada, pakcoy
+                    ≈ {(result.plantCount / 20).toFixed(1)} m² area tanam &nbsp;·&nbsp; Kangkung, selada, pakcoy
                   </p>
                 </div>
               </div>
             </div>
 
+            {/* Panduan Pengisian Bertahap */}
             <div className="bg-blue-50 border border-blue-100 rounded-2xl p-4 shadow-sm">
-              <h4 className="text-blue-900 mb-2">Ingat Ya</h4>
-              <ul className="space-y-1 text-sm text-blue-800">
-                <li>• Kalau baru mulai, isi setengahnya dulu</li>
-                <li>• Tambah ikan pelan-pelan tiap 2-3 bulan</li>
-                <li>• Pastikan saringan jalan terus</li>
+              <h4 className="text-blue-900 font-semibold mb-3">📋 Panduan Pengisian Bertahap</h4>
+              <ul className="space-y-2 text-sm text-blue-800">
+                <li className="flex items-start gap-2">
+                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 0–4:</span>
+                  <span>Isi 1–3 ekor ikan indikator saja (cycling bakteri)</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 4–6:</span>
+                  <span>Tebar <strong>{result.fishCountBeginner}</strong> ekor — cek amonia &lt;0,5 ppm dulu</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 6–8:</span>
+                  <span>Naikkan ke <strong>{result.fishCount75}</strong> ekor jika air tetap jernih</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="font-semibold text-blue-600 flex-shrink-0 w-24">Minggu 8+:</span>
+                  <span>Kapasitas penuh <strong>{result.fishCount}</strong> ekor</span>
+                </li>
               </ul>
             </div>
+
           </div>
         )}
       </div>
