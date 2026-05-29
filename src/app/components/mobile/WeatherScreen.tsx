@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, Search, MapPin, AlertTriangle, CloudRain } from 'lucide-react';
+import { ArrowLeft, Search, MapPin, AlertTriangle, CloudRain, Info } from 'lucide-react';
 
 interface WeatherScreenProps {
   onBack: () => void;
@@ -479,6 +479,15 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
             </div>
           </div>
         )}
+
+        {/* Credit Kepercayaan Sumber Cuaca */}
+        <div className="flex items-start justify-center gap-2 py-4 border-t border-slate-200/60 mt-4 px-4">
+          <Info className="w-3.5 h-3.5 text-gray-400 mt-0.5 flex-shrink-0" />
+          <p className="text-[10px] text-gray-400 text-left leading-relaxed font-medium max-w-xs">
+            Data perkiraan cuaca bersumber dari <span className="font-semibold text-gray-500">Open-Meteo (Sistem Prakiraan Global)</span> & pencarian wilayah didukung oleh proyek peta dunia <span className="font-semibold text-gray-500">OpenStreetMap</span>.
+          </p>
+        </div>
+
       </div>
     </div>
   );
