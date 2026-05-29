@@ -58,6 +58,17 @@ const getWeatherInfo = (code: number) => {
   return                               { label: 'Berawan',        emoji: '☁️',  color: 'text-slate-500'  };
 };
 
+const getShortWeatherLabel = (code: number): string => {
+  if (code === 0)               return 'Cerah';
+  if ([1,2,3].includes(code))   return 'Berawan';
+  if ([45,48].includes(code))   return 'Berkabut';
+  if ([51,53,55].includes(code))return 'Gerimis';
+  if ([61,63,65].includes(code))return 'Hujan';
+  if ([80,81,82].includes(code))return 'H. Deras';
+  if ([95,96,99].includes(code))return 'Petir';
+  return 'Berawan';
+};
+
 const getFarmerTip = (code: number, phase: PhaseKey): string => {
   const rainy = [51,53,55,61,63,65,80,81,82,95,96,99].includes(code);
   const clear = [0,1].includes(code);
@@ -315,17 +326,19 @@ export function WeatherScreen({ onBack }: WeatherScreenProps) {
                     onClick={() => setSelectedDayIdx(idx)}
                     className={`flex-shrink-0 flex flex-col items-center py-2.5 px-3 rounded-2xl transition-all active:scale-95 border min-w-[68px] ${
                       isActive
-                        ? 'bg-emerald-600 border-emerald-700 shadow-md'
+                        ? 'bg-emerald-100 border-emerald-300 shadow-sm'
                         : 'bg-white border-slate-100 shadow-sm'
                     }`}
                   >
-                    <span className={`text-[11px] font-bold leading-tight ${isActive ? 'text-white' : isToday ? 'text-emerald-600' : 'text-gray-700'}`}>
+                    <span className={`text-[11px] font-bold leading-tight ${isActive ? 'text-emerald-800' : isToday ? 'text-emerald-600' : 'text-gray-700'}`}>
                       {main}
                     </span>
-                    <span className={`text-[9px] mt-0.5 ${isActive ? 'text-emerald-100' : 'text-gray-400'}`}>
+                    <span className={`text-[9px] mt-0.5 ${isActive ? 'text-emerald-600' : 'text-gray-400'}`}>
                       {sub}
                     </span>
-                    <span className="text-base mt-1">{getWeatherInfo(day.siang.weatherCode).emoji}</span>
+                    <span className={`text-[9px] mt-1 font-semibold leading-tight text-center ${isActive ? 'text-emerald-700' : 'text-gray-500'}`}>
+                      {getShortWeatherLabel(day.siang.weatherCode)}
+                    </span>
                   </button>
                 );
               })}
