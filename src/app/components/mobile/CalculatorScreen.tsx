@@ -47,8 +47,10 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
     const fish_count_raw = Math.floor(V_efektif_m3 * density_per_m3);
 
-    // Hard cap biomassa FAO (20 kg/m³)
-    const batas_biomassa = V_efektif_m3 * 20;
+    // Hard cap biomassa FAO 2014 Tabel 8.1:
+    // Tangki ≥ 500 L → 20 kg/m³ | Tangki < 500 L → 10 kg/m³ (lebih ketat)
+    const cap_per_m3    = V_efektif >= 500 ? 20 : 10;
+    const batas_biomassa = V_efektif_m3 * cap_per_m3;
     const biomassa_check = fish_count_raw * harvest_weight_kg;
     const fish_count = biomassa_check > batas_biomassa
       ? Math.floor(batas_biomassa / harvest_weight_kg)
