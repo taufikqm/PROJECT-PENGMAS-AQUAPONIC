@@ -127,7 +127,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
           <ArrowLeft className="w-5 h-5" />
           <span>Kembali</span>
         </button>
-        <h1 className="text-2xl text-white mb-1">Hitung Isi Kolam Lele</h1>
+        <h1 className="text-2xl text-white mb-1">
+          Hitung Isi Kolam {fishTypes.find(f => f.id === fishType)?.name || 'Ikan'}
+        </h1>
         <p className="text-cyan-100 text-sm">Berapa ekor yang aman untuk kolam kamu?</p>
       </div>
 
@@ -247,7 +249,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <Fish className="w-5 h-5 text-amber-600" />
-                    <p className="text-sm font-semibold text-amber-800">Jumlah Lele untuk 2 Bulan Pertama</p>
+                    <p className="text-sm font-semibold text-amber-800">Jumlah {result.fishName} untuk 2 Bulan Pertama</p>
                   </div>
                   <p className="text-3xl font-bold text-amber-900">{result.fishCountBeginner.toLocaleString('id-ID')} Ekor</p>
                   <p className="text-xs text-amber-700 mt-2 leading-relaxed">
@@ -259,7 +261,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                 <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <Fish className="w-5 h-5 text-emerald-600" />
-                    <p className="text-sm font-semibold text-emerald-800">Lele Saat Kolam Sudah Stabil</p>
+                    <p className="text-sm font-semibold text-emerald-800">{result.fishName} Saat Kolam Sudah Stabil</p>
                   </div>
                   <p className="text-3xl font-bold text-emerald-900">{result.fishCount.toLocaleString('id-ID')} Ekor</p>
                   <p className="text-xs text-emerald-700 mt-2 leading-relaxed">
@@ -273,9 +275,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                     <Fish className="w-5 h-5 text-red-500" />
                     <p className="text-sm font-semibold text-red-800">⚠️ Batas Aman — Jangan Lewati Ini</p>
                   </div>
-                  <p className="text-3xl font-bold text-red-900">{result.biomassaKg.toFixed(1)} kg berat total lele</p>
+                  <p className="text-3xl font-bold text-red-900">{result.biomassaKg.toFixed(1)} kg berat total {result.fishName}</p>
                   <p className="text-xs text-red-700 mt-2 leading-relaxed">
-                    Kalau berat lele di kolam sudah melebihi angka ini, ikan bisa kekurangan oksigen dan mati mendadak.
+                    Kalau berat {result.fishName} di kolam sudah melebihi angka ini, ikan bisa kekurangan oksigen dan mati mendadak.
                   </p>
                 </div>
 
@@ -287,7 +289,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   </div>
                   <p className="text-3xl font-bold text-green-900">{result.plantCount} Lubang Tanam</p>
                   <p className="text-xs text-green-700 mt-2 leading-relaxed">
-                    Sekitar {(result.plantCount / 20).toFixed(0)} meter persegi area tanam. Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — ketiganya tumbuh subur dari kotoran lele dan tidak butuh perawatan khusus.
+                    Sekitar {(result.plantCount / 20).toFixed(0)} meter persegi area tanam. Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — ketiganya tumbuh subur dari kotoran {result.fishName} dan tidak butuh perawatan khusus.
                   </p>
                 </div>
 
@@ -303,13 +305,13 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">1</span>
                   <div>
                     <p className="font-semibold">Minggu 1–4: Siapkan air kolam dulu</p>
-                    <p className="text-blue-700 mt-0.5">Masukkan <strong>2–3 ekor lele kecil saja</strong> sebagai percobaan. Jangan langsung banyak. Biarkan 4 minggu sampai air tidak berbau dan jernih.</p>
+                    <p className="text-blue-700 mt-0.5">Masukkan <strong>2–3 ekor {result.fishName} kecil saja</strong> sebagai percobaan. Jangan langsung banyak. Biarkan 4 minggu sampai air tidak berbau dan jernih.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">2</span>
                   <div>
-                    <p className="font-semibold">Minggu 4–8: Tebar lele pertama</p>
+                    <p className="font-semibold">Minggu 4–8: Tebar {result.fishName} pertama</p>
                     <p className="text-blue-700 mt-0.5">Kalau air sudah tidak bau menyengat, tebar <strong>{result.fishCountBeginner} ekor</strong>. Amati kondisi air 2–3 hari setelah ditebar.</p>
                   </div>
                 </li>
@@ -317,14 +319,14 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                   <span className="bg-blue-200 text-blue-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">3</span>
                   <div>
                     <p className="font-semibold">Minggu 8–12: Tambah bertahap</p>
-                    <p className="text-blue-700 mt-0.5">Kalau lele sehat dan air jernih, naikkan ke <strong>{result.fishCount75} ekor</strong>. Jangan tambah sekaligus, tambah sedikit-sedikit.</p>
+                    <p className="text-blue-700 mt-0.5">Kalau {result.fishName} sehat dan air jernih, naikkan ke <strong>{result.fishCount75} ekor</strong>. Jangan tambah sekaligus, tambah sedikit-sedikit.</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-3">
                   <span className="bg-emerald-200 text-emerald-900 font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0 text-xs mt-0.5">✓</span>
                   <div>
                     <p className="font-semibold text-emerald-800">Bulan ke-3 ke atas: Kolam penuh</p>
-                    <p className="text-emerald-700 mt-0.5">Kolam siap diisi <strong>{result.fishCount} ekor</strong> lele penuh. Pantau terus agar ikan tidak berdesakan.</p>
+                    <p className="text-emerald-700 mt-0.5">Kolam siap diisi <strong>{result.fishCount} ekor</strong> {result.fishName} penuh. Pantau terus agar ikan tidak berdesakan.</p>
                   </div>
                 </li>
               </ul>
