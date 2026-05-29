@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { ArrowLeft, Fish, Sprout } from 'lucide-react';
-import { supabase } from '../../../lib/supabase';
 
 interface CalculatorScreenProps {
   onBack: () => void;
@@ -37,9 +36,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
     fishName?: string;
   }>(null);
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Rumus FAO — dipakai di path online maupun offline
+  // Rumus FAO — data lokal, hasil instan tanpa perlu internet
   const computeResult = (
     l: number, w: number, h: number,
     density_per_m3: number, harvest_weight_kg: number,
@@ -86,50 +83,24 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
     };
   };
 
-  const calculate = async () => {
+  const calculate = () => {
     const l = parseFloat(length);
     const w = parseFloat(width);
     const h = parseFloat(height);
 
     if (isNaN(l) || isNaN(w) || isNaN(h) || l <= 0 || w <= 0 || h <= 0) {
-      alert('Mohon masukkan angka yang valid');
+      alert('Mohon masukkan angka yang valid untuk panjang, lebar, dan tinggi air.');
       return;
     }
 
-    setIsLoading(true);
-    try {
-      // Ambil data ikan dari Supabase (kolom baru)
-      const { data, error } = await supabase
-        .from('fish_types')
-        .select('id, name, density_per_m3, harvest_weight_kg')
-        .eq('id', fishType)
-        .single();
-
-      if (error) throw error;
-
-      setResult(computeResult(
-        l, w, h,
-        data.density_per_m3,
-        data.harvest_weight_kg,
-        data.name,
-        vegetableType
-      ));
-    } catch (error) {
-      console.error(error);
-      console.warn('Menggunakan kalkulator lokal (Offline Fallback)...');
-
-      // Offline fallback — rumus identik via computeResult()
-      const localFish = fishTypes.find(f => f.id === fishType);
-      setResult(computeResult(
-        l, w, h,
-        localFish?.density_per_m3 ?? 125,
-        localFish?.harvest_weight_kg ?? 0.25,
-        localFish?.name ?? 'Ikan',
-        vegetableType
-      ));
-    } finally {
-      setIsLoading(false);
-    }
+    const fish = fishTypes.find(f => f.id === fishType) ?? fishTypes[0];
+    setResult(computeResult(
+      l, w, h,
+      fish.density_per_m3,
+      fish.harvest_weight_kg,
+      fish.name,
+      vegetableType
+    ));
   };
 
   return (
@@ -266,10 +237,9 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
 
           <button
             onClick={calculate}
-            disabled={isLoading}
-            className="w-full bg-cyan-600 hover:bg-cyan-700 disabled:bg-cyan-400 text-white py-4 rounded-xl mt-6 active:scale-98 transition-all"
+            className="w-full bg-cyan-600 hover:bg-cyan-700 active:bg-cyan-800 text-white py-4 rounded-xl mt-6 active:scale-95 transition-all font-semibold text-lg"
           >
-            {isLoading ? 'Menghitung...' : 'Hitung'}
+            Hitung
           </button>
         </div>
 
