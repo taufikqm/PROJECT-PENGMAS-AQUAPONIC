@@ -21,6 +21,7 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [fishType, setFishType] = useState('lele');
+  const [vegetableType, setVegetableType] = useState<'daun' | 'buah'>('daun');
   const [result, setResult] = useState<null | {
     volume: number;
     fishCount: number;
@@ -28,8 +29,10 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
     fishCountBeginner: number;
     fishCount75: number;
     plantCount: number;
+    areaTanam: number;
     biomassaKg: number;
     volumeEfektif: number;
+    vegetableType: 'daun' | 'buah';
     isMujair: boolean;
     fishName?: string;
   }>(null);
@@ -40,7 +43,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
   const computeResult = (
     l: number, w: number, h: number,
     density_per_m3: number, harvest_weight_kg: number,
-    fishName: string
+    fishName: string,
+    vegType: 'daun' | 'buah'
   ) => {
     const volume_liter  = l * w * h * 1000;
     const V_efektif     = volume_liter * 0.85;          // 85% volume efektif
@@ -57,20 +61,26 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
       ? Math.floor(batas_biomassa / harvest_weight_kg)
       : fish_count_raw;
 
-    // Jumlah tanaman (FAO Feed Rate Ratio: 1 m² per 5 kg biomassa, 20 lubang/m²)
+    // Jumlah tanaman — FAO Feed Rate Ratio
+    // Sayur Daun: 1 m² per 5 kg biomassa, densitas 20 lubang/m²
+    // Sayur Buah: area +30%, densitas 6 tanaman/m² (tengah rentang 4-8)
     const biomassa_final = fish_count * harvest_weight_kg;
-    const area_tanam     = biomassa_final / 5;
-    const plant_count    = Math.round(area_tanam * 20);
+    const area_base      = biomassa_final / 5;
+    const area_tanam     = vegType === 'buah' ? area_base * 1.3 : area_base;
+    const densitas       = vegType === 'buah' ? 6 : 20;
+    const plant_count    = Math.round(area_tanam * densitas);
 
     return {
       volume: volume_liter,
       volumeEfektif: V_efektif,
       fishCount: fish_count,
-      fishCountStarter: Math.max(1, Math.ceil(fish_count * 0.10)),   // 10% — fase persiapan air
-      fishCountBeginner: Math.floor(fish_count * 0.5),               // 50%
-      fishCount75: Math.floor(fish_count * 0.75),                    // 75%
+      fishCountStarter: Math.max(1, Math.ceil(fish_count * 0.10)),
+      fishCountBeginner: Math.floor(fish_count * 0.5),
+      fishCount75: Math.floor(fish_count * 0.75),
       plantCount: plant_count,
+      areaTanam: area_tanam,
       biomassaKg: biomassa_final,
+      vegetableType: vegType,
       isMujair: fishName.toLowerCase().includes('mujair'),
       fishName,
     };
@@ -101,7 +111,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
         l, w, h,
         data.density_per_m3,
         data.harvest_weight_kg,
-        data.name
+        data.name,
+        vegetableType
       ));
     } catch (error) {
       console.error(error);
@@ -113,7 +124,8 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
         l, w, h,
         localFish?.density_per_m3 ?? 125,
         localFish?.harvest_weight_kg ?? 0.25,
-        localFish?.name ?? 'Ikan'
+        localFish?.name ?? 'Ikan',
+        vegetableType
       ));
     } finally {
       setIsLoading(false);
@@ -217,6 +229,39 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                 ))}
               </select>
             </div>
+
+            {/* Toggle Jenis Sayuran */}
+            <div>
+              <label className="block text-sm text-gray-700 mb-2">
+                Jenis Sayuran yang Akan Ditanam
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                <button
+                  type="button"
+                  onClick={() => setVegetableType('daun')}
+                  className={`py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all ${
+                    vegetableType === 'daun'
+                      ? 'bg-green-600 border-green-600 text-white'
+                      : 'bg-white border-gray-300 text-gray-700 hover:border-green-400'
+                  }`}
+                >
+                  🥬 Sayur Daun
+                  <span className="block text-xs font-normal mt-0.5 opacity-80">Kangkung, selada, pakcoy</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setVegetableType('buah')}
+                  className={`py-3 px-4 rounded-xl border-2 text-sm font-medium transition-all ${
+                    vegetableType === 'buah'
+                      ? 'bg-orange-500 border-orange-500 text-white'
+                      : 'bg-white border-gray-300 text-gray-700 hover:border-orange-400'
+                  }`}
+                >
+                  🍅 Sayur Buah
+                  <span className="block text-xs font-normal mt-0.5 opacity-80">Tomat, terong, cabai</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           <button
@@ -289,11 +334,19 @@ export function CalculatorScreen({ onBack }: CalculatorScreenProps) {
                 <div className="bg-green-50 border border-green-200 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-1">
                     <Sprout className="w-5 h-5 text-green-600" />
-                    <p className="text-sm font-semibold text-green-800">Sayuran yang Bisa Ditanam</p>
+                    <p className="text-sm font-semibold text-green-800">
+                      {result.vegetableType === 'buah' ? '🍅 Sayur Buah' : '🥬 Sayur Daun'} yang Bisa Ditanam
+                    </p>
                   </div>
-                  <p className="text-3xl font-bold text-green-900">{result.plantCount} Lubang Tanam</p>
+                  <p className="text-3xl font-bold text-green-900">
+                    {result.plantCount} {result.vegetableType === 'buah' ? 'Titik Tanam' : 'Lubang Tanam'}
+                  </p>
                   <p className="text-xs text-green-700 mt-2 leading-relaxed">
-                    Sekitar {(result.plantCount / 20).toFixed(0)} meter persegi area tanam. Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — ketiganya tumbuh subur dari kotoran {result.fishName} dan tidak butuh perawatan khusus.
+                    Sekitar {result.areaTanam.toFixed(1)} meter persegi area tanam.
+                    {result.vegetableType === 'buah'
+                      ? <> Cocok untuk <strong>tomat, terong, atau cabai</strong> — butuh lahan lebih luas tapi nilai jualnya lebih tinggi.</>  
+                      : <> Cocok untuk <strong>kangkung, selada, atau pakcoy</strong> — tumbuh subur dari kotoran {result.fishName} dan tidak butuh perawatan khusus.</>
+                    }
                   </p>
                 </div>
 
